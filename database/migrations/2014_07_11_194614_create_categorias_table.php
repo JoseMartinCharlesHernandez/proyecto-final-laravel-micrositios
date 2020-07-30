@@ -16,6 +16,8 @@ class CreateCategoriasTable extends Migration
         Schema::create('categorias', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
+            $table->unsignedBigInteger('id_estatus');
+            $table->foreign('id_estatus')->references('id')->on('estatus');
             $table->timestamps();
         });
     }

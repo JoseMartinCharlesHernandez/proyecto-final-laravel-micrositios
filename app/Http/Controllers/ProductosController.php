@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use App\Micrositio;
 use App\Producto;
+use App\Estatus;
 use Illuminate\Http\Request;
 class ProductosController extends Controller
 {
@@ -57,20 +58,7 @@ class ProductosController extends Controller
     public function store()
     {
 
-        $v = Request()->validate([
-            "nombre"  => "required|max:100",
-            "direccion"  =>"required| max:130",
-            "descripcion" =>"required|:max:255"
-        ],[
-            "nombre.required"=>"Es necesario el nombre del establecimiento.",
-            "nombre.max:100"=>"El nombre solo puede tener 100 caracteres como maximo.",
-            "direccion.required"=>"Es necesario el nombre del establecimiento.",
-            "direccion.max:130"=>"La dirección solo puede tener 130 caracteres como maximo.",
-            "descripcion.required"=>"Es necesaria la descripción del establecimiento.",
-            "descripcion.max:1255"=>"La descripción solo puede tener 255 caracteres como maximo.",
-
-        ]);
-Request()->validate([
+        Request()->validate([
             "nombre"  => "required|max:100",
             "precio"  =>"required|digits_between:1,1000000",
         ],[
@@ -131,7 +119,8 @@ Request()->validate([
        
       if(Auth::user()->type==1){
         $micrositios = Micrositio::all();  
-        return view('productos.modificar',['producto'=>$producto,'micrositios'=>$micrositios]);
+        $estatus = Estatus::where('id','=',1)->orwhere('id','=',2)->get();
+        return view('productos.modificar',['producto'=>$producto,'micrositios'=>$micrositios,'estatus'=>$estatus]);
       }
     
         return view('productos.modificar',['producto'=>$producto]); 
@@ -145,24 +134,40 @@ Request()->validate([
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($id)
     {
-         Request()->validate([
-            "nombre"  => "required|max:100",
-            "precio"  =>"required| max:130",
-            "descripcion" =>"required|:max:255"
-        ],[
-            "nombre.required"=>"Es necesario el nombre del establecimiento.",
-            "nombre.max:100"=>"El nombre solo puede tener 100 caracteres como maximo.",
-            "direccion.required"=>"Es necesario el nombre del establecimiento.",
-            "direccion.max:130"=>"La dirección solo puede tener 130 caracteres como maximo.",
-            "descripcion.required"=>"Es necesaria la descripción del establecimiento.",
-            "descripcion.max:1255"=>"La descripción solo puede tener 255 caracteres como maximo.",
 
+        Request()->validate([
+            "nombre"  => "required|max:100",
+            "precio"  =>"required|digits_between:1,1000000",
+        ],[
+            "nombre.required"=>"Es necesario el nombre del producto.",
+            "nombre.max:100"=>"El nombre solo puede tener 100 caracteres como maximo.",
+            "precio.required" => "Es necesario el precio del producto.",
+            "precio.digits_between"=>"el precio debe de estar entre un rango de 1 a 1000000 valido",
         ]);
 
 
+        if(Request()->hasFile("imagen")){
+            $file = Request()->file("imagen");
+            $nombre_imagen = $file->getClientOriginalName();
+            $file->move(public_path().'/productos/',$nombre_imagen);
+        }else{
+              $nombre_imagen = "default.png";  
+        }
 
+        $p = Producto::find($id);    
+        $p->nombre = Request('nombre');
+        $p->precio = Request('precio');
+        $p->imagen_url ="/productos/".$nombre_imagen;
+        if(Auth::user()->type==1){
+            $p->id_estatus = Request('id_estatus');
+            $p->id_micrositio = Request('id_micrositio');   
+        }
+
+        $p->save();
+
+        return redirect()->route('productos.listar');
 
     }
 

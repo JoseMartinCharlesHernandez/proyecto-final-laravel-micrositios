@@ -16,7 +16,8 @@ class CategoriasSeeder extends Seeder
 
         foreach ($categorias as $categoria) {         
             DB::table('categorias')->insert([
-                'nombre' => $categoria
+                'nombre' => $categoria,
+                'id_estatus'=>1 
             ]);
         }
         

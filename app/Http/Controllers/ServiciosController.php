@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Estatus;
 use Illuminate\Http\Request;
 use App\Servicio;
 use App\Micrositio;
+use GeneaLabs\LaravelMaps\Providers\Service;
 use Illuminate\Support\Facades\Auth;
 class ServiciosController extends Controller
 {
@@ -119,8 +121,9 @@ class ServiciosController extends Controller
       $servicio = Servicio::find($id);
        
       if(Auth::user()->type==1){
-        $micrositios = Micrositio::all();  
-        return view('servicios.modificar',['servicio'=>$servicio,'micrositios'=>$micrositios]);
+        $micrositios = Micrositio::where('id_estatus',1)->get();  
+        $estatus = Estatus::where('id','=',1)->orwhere('id','=',2)->get();
+        return view('servicios.modificar',['servicio'=>$servicio,'micrositios'=>$micrositios,'estatus'=>$estatus]);
       }
     
         return view('servicios.modificar',['servicio'=>$servicio]); 
@@ -134,9 +137,40 @@ class ServiciosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($id)
     {
-        //
+        
+        Request()->validate([
+            "nombre"  => "required|max:100",
+            "precio"  =>"required|digits_between:1,1000000",
+        ],[
+            "nombre.required"=>"Es necesario el nombre del servicio.",
+            "nombre.max:100"=>"El nombre solo puede tener 100 caracteres como maximo.",
+            "precio.required" => "Es necesario el precio del servicio.",
+            "precio.digits_between"=>"el precio debe de estar entre un rango de 1 a 1000000 valido",
+        ]);
+        
+        if(Request()->hasFile("imagen")){
+            $file = Request()->file("imagen");
+            $nombre_imagen = $file->getClientOriginalName();
+            $file->move(public_path().'/servicios/',$nombre_imagen);
+        }else{
+              $nombre_imagen = "default.png";  
+        }
+            
+
+       $s = Servicio::find($id);     
+       $s->nombre = Request('nombre');
+       $s->precio = Request('precio');
+       $s->imagen_url= "/servicios/".$nombre_imagen;  
+       if(Auth::user()->type==1){
+          $s->id_estatus = Request('id_estatus');
+          $s->id_micrositio =  Request('id_micrositio');
+       }
+       $s->save();
+
+       return redirect()->route('servicios.listar');
+
     }
 
     /**

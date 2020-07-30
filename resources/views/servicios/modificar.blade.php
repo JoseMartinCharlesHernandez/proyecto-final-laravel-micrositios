@@ -44,18 +44,25 @@
                     </div>
 
                     @if(Auth::user()->type==1)
+                    
                         <div class="form-group">
                             <label for="micrositios">Micrositio</label>
-                            <select class="form-control" name="micrositio" required>
+                            <select class="form-control" name="id_micrositio" required>
                                 @foreach ($micrositios as $item)
                                     <option value="{{$item->id}}" {{$servicio->id_micrositio == $item->id ? 'selected' : '' }} >{{$item->nombre}}</option>   
                                 @endforeach
                             </select>
-                            @if ($errors->has('micrositio'))
-                            <div class="col-form-label" style="color:red;">{{$errors->first('micrositio')}}</div>
-                            @endif
-                            <div id="error_type" class="col-form-label" style="color:red; display:none;"></div>
                         </div>    
+
+                        <div class="form-group">
+                            <label for="micrositios">Estatus</label>
+                            <select class="form-control" name="id_estatus" required>
+                                @foreach ($estatus as $item)
+                                    <option value="{{$item->id}}" {{$servicio->id_estatus == $item->id ? 'selected' : '' }} >{{$item->nombre}}</option>   
+                                @endforeach
+                            </select>
+                        </div>    
+
                     @endif
 
                     </div>

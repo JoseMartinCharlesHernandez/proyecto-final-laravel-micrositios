@@ -40,12 +40,23 @@ Route::get('/productos/update/{id}','ProductosController@update')->name('product
 //rutas para gestion de servicios
 Route::get('/servicios-listar','ServiciosController@index')->name('servicios.listar');
 Route::get('/servicios-crear','ServiciosController@create')->name('servicios.crear');
-Route::post('servicios-store','ServiciosController@store')->name('servicios.store');
+Route::post('/servicios-store','ServiciosController@store')->name('servicios.store');
 Route::get('/servicios/show/{id}','ServiciosController@show')->name('servicios.show');
 Route::get('/servicios/destroy/{id}','ServiciosController@destroy')->name('servicios.destroy');
 Route::get('/servicios/restore/{id}','ServiciosController@restore')->name('servicios.restore');
 Route::get('/servicios/edit/{id}','ServiciosController@edit')->name('servicios.edit');
 Route::get('/servicios/update/{id}','ServiciosController@update')->name('servicios.update');
+
+//rutas para gestion de categorias
+Route::get('/categorias-listar','CategoriasController@index')->name('categorias.listar');
+Route::get('/categorias-crear','CategoriasController@create')->name('categorias.crear');
+Route::post('/categorias-store','CategoriasController@store')->name('categorias.store');
+Route::get('/categorias/show/{id}','CategoriasController@show')->name('categorias.show');
+Route::get('/categorias/destroy/{id}','CategoriasController@destroy')->name('categorias.destroy');
+Route::get('/categorias/restore/{id}','CategoriasController@restore')->name('categorias.restore');
+Route::get('/categorias/edit/{id}','CategoriasController@edit')->name('categorias.edit');
+Route::get('/categorias/update/{id}','CategoriasController@update')->name('categorias.update');
+
 
 //rutas para micrositios
 Route::get('/micrositios-listar','MicrositiosController@listar')->name('micrositios.listar');
