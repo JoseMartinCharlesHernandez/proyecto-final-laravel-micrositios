@@ -7,10 +7,9 @@ use App\estado;
 use App\Micrositio;
 use App\Producto;
 use App\municipio;
-use GuzzleHttp\Psr7\Request;
+use App\Estatus;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-use Laravel\Ui\Presets\React;
 
 class MicrositiosController extends Controller
 {
@@ -132,7 +131,8 @@ class MicrositiosController extends Controller
         $categorias = Categoria::all();
         $estados = Estado::all();
         $municipios = municipio::all();
-        return view('micrositios.modificar',compact('micrositio','categorias','estados','municipios'));
+        $estatus = Estatus::all();
+        return view('micrositios.modificar',compact('micrositio','categorias','estados','municipios','estatus'));
     }
 
     /**
@@ -148,7 +148,9 @@ class MicrositiosController extends Controller
         $v = Request()->validate([
             "nombre"  => "required|max:100",
             "direccion"  =>"required| max:130",
-            "descripcion" =>"required|:max:255"
+            "descripcion" =>"required|:max:255",
+            "lat" => 'required',
+            "lng"  =>'required'
         ],[
             "nombre.required"=>"Es necesario el nombre del establecimiento.",
             "nombre.max:100"=>"El nombre solo puede tener 100 caracteres como maximo.",
@@ -156,7 +158,8 @@ class MicrositiosController extends Controller
             "direccion.max:130"=>"La dirección solo puede tener 130 caracteres como maximo.",
             "descripcion.required"=>"Es necesaria la descripción del establecimiento.",
             "descripcion.max:1255"=>"La descripción solo puede tener 255 caracteres como maximo.",
-
+            "lat.required" => "debes de elegir una ubicación",
+            "lng.required" => "Debes de elegir una ubicación"
         ]);
 
 
@@ -180,7 +183,7 @@ class MicrositiosController extends Controller
         $micrositio->id_estado = Request('estado');
         $micrositio->id_municipio = Request('municipio');
         $micrositio->descripcion = Request('descripcion');
-        $micrositio->id_estatus =1;
+        $micrositio->id_estatus =Request('id_estatus');
         $micrositio->id_empresario = Request('listar') == 1 ? $micrositio->id_empresario :  Auth::user()->id;
         $micrositio->lat=Request('lat');
         $micrositio->lng=Request('lng');

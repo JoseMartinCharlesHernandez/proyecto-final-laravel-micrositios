@@ -46,13 +46,17 @@
                                 <button class="btn btn-warning" id="btn_remove" >remover marcador</button>
                             </div><br>
                             <div class="col-sm-6">
-                            <input type="text" class="form-control" id="lat" name="lat" value="{{$micrositio->lat}}" placeholder="latitud" disabled >
+                            <input type="text" class="form-control" id="lat" name="lat" value="{{$micrositio->lat}}" placeholder="latitud" disabled  >
                             </div><br>
                             <div class="col-sm-6">
-                            <input type="text" class="form-control" id="lng" name="lng" value=" {{$micrositio->lng  }}" placeholder="longitud" disabled>
+                            <input type="text" class="form-control" id="lng" name="lng" value=" {{$micrositio->lng  }}" placeholder="longitud" disabled >
                             </div>
                         </div>   
                         <div id ="mapaFormulario" class="col-sm-6" > </div> 
+                        @if ($errors->has('lat') || $errors->has('lng'))
+                        <div class="col-form-label col-sm-6" style="color:red;"><center>{{$errors->first('lat') }}</center></div>
+                        @endif
+                        <div id="error_type" class="col-form-label" style="color:red; display:none;"></div>
                       </div>
 
 
@@ -116,6 +120,14 @@
                             @enderror    
                         </div>
 
+                        <div class="form-group">
+                            <label for="micrositios">Estatus</label>
+                            <select class="form-control" name="id_estatus" required>
+                                @foreach ($estatus as $item)
+                                    <option value="{{$item->id}}" {{$micrositio->id_estatus == $item->id ? 'selected' : '' }} >{{$item->nombre}}</option>   
+                                @endforeach
+                            </select>
+                        </div>    
                     </div>
                     <!-- /.card-body -->
 
@@ -219,6 +231,8 @@
 
     const marker = new google.maps.Marker({
       position: location,
+      draggable: true,
+      animation: google.maps.Animation.DROP,
       map: map
     });
     markerGlogal != null ? remove() : null;

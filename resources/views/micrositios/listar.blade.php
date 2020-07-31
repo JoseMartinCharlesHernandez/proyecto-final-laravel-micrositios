@@ -41,6 +41,12 @@
                         @case(2)
                             <span class="badge badge-danger">inactivo</span>
                             @break            
+                        @case(3)
+                        <span class="badge bg-warning">suspendido</span>
+                            @break
+                        @case(4)
+                        <span class="badge badge-dark">rechazado</span> 
+                        @break   
                     @endswitch
                 </td>
                   <td>

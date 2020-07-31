@@ -11,7 +11,7 @@ class EstatusSeeder extends Seeder
      */
     public function run()
     {
-        $estatus = array('activo','inactivo','suspendido','rechazado','aceptado');
+        $estatus = array('activo','inactivo','suspendido','rechazado');
         
         foreach ($estatus as $e) {
             DB::table('estatus')->insert([

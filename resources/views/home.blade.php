@@ -350,6 +350,8 @@
 
     const marker = new google.maps.Marker({
       position: {lat: item.lat, lng:item.lng},
+      draggable: true,
+      animation: google.maps.Animation.DROP,
       map: map,
       title: item.nombre
     });

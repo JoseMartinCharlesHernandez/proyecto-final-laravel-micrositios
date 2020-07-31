@@ -69,6 +69,11 @@ Route::get('/micrositios/restore/{id}','MicrositiosController@restore')->name('m
 Route::get('/micrositios/edit/{id}','MicrositiosController@edit')->name('micrositios.edit');
 Route::get('/micrositios-mapa',function(){ return view('micrositios.mapa');})->name('micrsitios.mapa');
 
+
+//rutas para ventas
+
+Route::get('/ventas/create/{id}','ventasController@create')->name('ventas.create');
+Route::get('/ventas/store','VentasController@store')->name('ventas.store');
 //ruta para test de funciones
 
 Route::get('/parse-json','TestController@json');

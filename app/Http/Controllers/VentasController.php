@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Micrositio;
+use App\Servicio;
+use App\Producto;
 use Illuminate\Http\Request;
 
 class VentasController extends Controller
@@ -21,11 +24,18 @@ class VentasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        //
+      $producto = Producto::find($id);
+      $micrositio = Micrositio::find($producto->id_micrositio);
+
+      //dd($venta);  
+      return view('ventas.create',compact('producto','micrositio'));
     }
 
+
+
+    
     /**
      * Store a newly created resource in storage.
      *
@@ -34,7 +44,7 @@ class VentasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd(Request());
     }
 
     /**

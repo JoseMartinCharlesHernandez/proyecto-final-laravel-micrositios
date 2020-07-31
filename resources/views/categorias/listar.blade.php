@@ -30,7 +30,7 @@
                                 @break
                         @case(2)
                             <span class="badge badge-danger">inactivo</span>
-                            @break            
+                            @break           
                     @endswitch
                 </td>
                   <td>
