@@ -71,11 +71,14 @@ Route::get('/micrositios-mapa',function(){ return view('micrositios.mapa');})->n
 
 
 //rutas para ventas
-
+Route::get('/ventas/listar','VentasController@index')->name('ventas.listar');
 Route::get('/ventas/create/{id}','ventasController@create')->name('ventas.create');
 Route::get('/ventas/store','VentasController@store')->name('ventas.store');
-//ruta para test de funciones
+Route::get('/ventas/destroy/{id}','VentasController@destroy')->name('ventas.destroy');
+Route::get('/ventas/restore/{id}','VentasController@restore')->name('ventas.restore');
 
+
+//ruta para test de funciones
 Route::get('/parse-json','TestController@json');
 
 
@@ -90,3 +93,4 @@ Route::get('/get-municipios/{estado}','AjaxController@getMunicipios')->name('get
 Route::get('/get-micrositios/{categoria}','AjaxController@getMicrositios')->name('get.micrositios');
 Route::get('/get-micrositios-palabra/{categoria}/{palabra}','AjaxController@getBySearch')->name('get.micrositios.palabra');
 Route::get('/get-data-donut','AjaxController@getDataDonut')->name('get.data.donut');
+Route::get('/send/quotation/emal','MensajeController@sendQuotation')->name('send.quotation');

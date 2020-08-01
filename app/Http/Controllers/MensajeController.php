@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\MensajeCotizacion;
 use App\Mail\MensajeRecivido;
+use App\Micrositio;
+use App\Producto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 class MensajeController extends Controller
 {
     /**
@@ -47,11 +51,22 @@ class MensajeController extends Controller
 
     public function resetPassword(User $user,$password){
   
-        Mail::to('proyecto.final.laravel@gmail.com')->queue(new MensajeRecivido($user,$password));
+        Mail::to($user->mail)->queue(new MensajeRecivido($user,$password));
       //  return new MensajeRecivido($data);
         return 'mensaje enviado';
         
     }
+
+    public function sendQuotation(){
+        $producto =  Producto::find(Request("id_producto"));
+        $micrositio = Micrositio::find(Request("id_micrositio"));
+        $usuario = User::find(Auth::user()->id);
+        Mail::to($usuario->email)->queue(new MensajeCotizacion($producto,$usuario,$micrositio));
+      //  return new MensajeRecivido($data);
+
+       return json_encode(' al correo: '.$usuario->email);
+    }
+
     /**
      * Display the specified resource.
      *

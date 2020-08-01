@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Micrositio;
 use App\municipio;
 use App\Producto;
-use Illuminate\Support\Facades\DB;
 class AjaxController extends Controller
 
 {
@@ -40,7 +39,7 @@ class AjaxController extends Controller
                                 join('micrositios as m','m.id','productos.id_micrositio')
                                 ->where([['productos.nombre','like',$palabra.'%'],
                                         ['productos.id_estatus',1] ]) 
-                                ->select("productos.nombre as producto","productos.precio","productos.imagen_url",
+                                ->select("productos.nombre as producto","productos.precio","productos.imagen_url","productos.id",
                                          'm.id as id_micrositio','m.nombre as nombre','m.lat','m.lng')
                                 ->get();
         }

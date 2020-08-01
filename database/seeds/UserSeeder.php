@@ -15,7 +15,7 @@ class UserSeeder extends Seeder
     {
         DB::table('users')->insert([
             'name' => 'admin',
-            'email' => 'admin@admin.com',
+            'email' => 'proyecto.final.laravel@gmail.com',
             'password' => Hash::make('password'),
             'id_estatus' =>'1',
             'type' => 1,

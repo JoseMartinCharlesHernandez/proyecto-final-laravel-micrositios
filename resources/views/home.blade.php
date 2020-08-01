@@ -18,7 +18,7 @@
           <div class="icon">
             <i class="ion ion-bag"></i>
           </div>
-          <a href="#" class="small-box-footer">Más información<i class="fas fa-arrow-circle-right"></i></a>
+          <a href="{{route('ventas.listar')}}" class="small-box-footer">Más información<i class="fas fa-arrow-circle-right"></i></a>
         </div>
       </div>
       <!-- ./col -->
@@ -33,7 +33,7 @@
           <div class="icon">
             <i class="fa fas fa-cubes"></i>
           </div>
-          <a href="#" class="small-box-footer">Más información<i class="fas fa-arrow-circle-right"></i></a>
+          <a href="{{route('micrositios.listar')}}" class="small-box-footer">Más información<i class="fas fa-arrow-circle-right"></i></a>
         </div>
       </div>
       <!-- ./col -->
@@ -422,7 +422,7 @@
             <a title="contactar al vendedor" href="#" class="btn btn-sm bg-teal">
               <i class="fas fa-comments"></i>
             </a>
-            <a href="#" class="btn btn-sm btn-warning">
+            <a href="/ventas/create/${item.id}" class="btn btn-sm btn-warning">
               <i class="fa fa-shopping-cart"></i> Comprar
             </a>
           </div>
