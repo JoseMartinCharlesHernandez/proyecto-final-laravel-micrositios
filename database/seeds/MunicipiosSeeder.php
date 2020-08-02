@@ -24,6 +24,12 @@ class MunicipiosSeeder extends Seeder
 
         $json = json_decode($json);
 
+        DB::table('municipios')->insert([
+            'municipio' => 'SIN ASIGNAR',
+            'estado' => 'SIN ASIGNAR',
+        ]);
+
+
         //se guardan los estados en la base de datos
         foreach ($json as $estado => $municipios) {
             foreach ($municipios as $municipio) {

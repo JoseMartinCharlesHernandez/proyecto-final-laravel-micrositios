@@ -15,6 +15,7 @@ class EstadosSeeder extends Seeder
     {
         //json con estados 
         $json = ' [
+            { "clave": "SINAS", "nombre": "SIN ASIGNAR" },
             { "clave": "AGS", "nombre": "AGUASCALIENTES" },
             { "clave": "BC",  "nombre": "BAJA CALIFORNIA" },
             { "clave": "BCS", "nombre": "BAJA CALIFORNIA SUR" },

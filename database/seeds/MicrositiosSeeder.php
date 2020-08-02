@@ -14,7 +14,7 @@ class MicrositiosSeeder extends Seeder
         Micrositio::create([
             "nombre" => 'Taqueria El Champion',
             "direccion" => "Avenida la Paz",
-            "id_categoria" => 1,
+            "id_categoria" => 2,
             "id_estado" => 29,
             "id_municipio" => 2025,
             "descripcion" => 'vendemos de todo',
@@ -28,7 +28,7 @@ class MicrositiosSeeder extends Seeder
         Micrositio::create([
             "nombre" => 'Ferreteria la Torre',
             "direccion" => "Colonia Tamatán",
-            "id_categoria" => 2,
+            "id_categoria" => 3,
             "id_estado" => 29,
             "id_municipio" => 2025,
             "descripcion" => 'vendemos de todo',
@@ -43,7 +43,7 @@ class MicrositiosSeeder extends Seeder
         Micrositio::create([
             "nombre" => 'Soriana',
             "direccion" => "Centro",
-            "id_categoria" => 3,
+            "id_categoria" => 4,
             "id_estado" => 29,
             "id_municipio" => 2025,
             "descripcion" => 'Tenemos todo lo que buscas',

@@ -229,15 +229,17 @@
         var donutChartCanvas2 = $('#donutChart').get(0).getContext('2d')
         var donutData2        = {
         labels: [
+           'Activos',
+           'Inactivos', 
+           'Suspendidos', 
+           'Pendientes',
            'Rechazados',
-            'Activos', 
-            'Suspendidos', 
-            'Inactivos', 
+           'Nuevos', 
         ],
         datasets: [
             {
             data: [700,500,400,600],
-            backgroundColor : ['#f56954', '#00a65a', '#f39c12', '#3c8dbc'],
+            backgroundColor : ['#4cbd3d','#d62525', '#20c1b4','#f8d34a','#1f1f19','#4ee7dc'],
             }
         ]
         }
@@ -310,10 +312,12 @@
     })
 
     //data de la grafica Micrositios
-    donutData2.datasets[0].data[0] = data.m_rechazados;
-    donutData2.datasets[0].data[1] = data.m_activos;
+    donutData2.datasets[0].data[0] = data.m_activos;
+    donutData2.datasets[0].data[1] = data.m_inactivos;
     donutData2.datasets[0].data[2] = data.m_suspendidos;
-    donutData2.datasets[0].data[3] = data.m_inactivos;
+    donutData2.datasets[0].data[3] = data.m_pendientes;
+    donutData2.datasets[0].data[4] = data.m_rechazados;
+    donutData2.datasets[0].data[5] = data.m_nuevos;
     donutChart2 = new Chart(donutChartCanvas2, {
         type: 'doughnut',
         data: donutData2,

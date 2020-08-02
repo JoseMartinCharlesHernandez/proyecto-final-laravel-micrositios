@@ -10,21 +10,21 @@
           <div class="card-body box-profile">
             <div class="text-center">
               <img class="profile-user-img img-fluid img-circle"
-            src="{{$existe ? $micrositio[0]->logo_url : '/logos/default.png' }}" 
+            src="{{$existe ? $micrositio->logo_url : '/logos/default.png' }}" 
                    alt="User profile picture">
             </div>
 
-        <h3 class="profile-username text-center">{{ $existe ? $micrositio[0]->nombre : 'nombre'}}</h3>
+            <h3 class="profile-username text-center">{{ $existe ? $micrositio->nombre : 'nombre'}}</h3>
 
             <ul class="list-group list-group-unbordered mb-3">
               <li class="list-group-item">
-                <b>Seguidores</b> <a class="float-right">1,322</a>
+              <b>Productos</b> <a class="float-right">{{ $contadores[0]}}</a>
               </li>
               <li class="list-group-item">
-                <b>Siguiendo</b> <a class="float-right">543</a>
+                <b>Servicios</b> <a class="float-right">{{ $contadores[1]}}</a>
               </li>
               <li class="list-group-item">
-                <b>Compras</b> <a class="float-right">13,287</a>
+              <b>Ventas</b> <a class="float-right">{{ $contadores[2]}}</a>
               </li>
             </ul>
           </div>
@@ -42,19 +42,19 @@
 
             <strong><i class="fas fa-map-marker-alt mr-1"></i> dirección</strong>
 
-               <p class="text-muted">{{ $existe ? $micrositio[0]->direccion : 'direccion'}}</p>
+               <p class="text-muted">{{ $existe ? $micrositio->direccion : 'direccion'}}</p>
 
             <hr>
 
             <strong><i class="fas fa-map-marker-alt mr-1"></i> ubicación</strong>
 
-               <p class="text-muted">{{ $existe ? $micrositio[0]->lat : 'lat'  }} , {{ $existe ? $micrositio[0]->lng : 'long'}}</p>
+               <p class="text-muted">{{ $existe ? $micrositio->lat : 'lat'  }} , {{ $existe ? $micrositio->lng : 'long'}}</p>
 
             <hr>
 
             <strong><i class="far fa-file-alt mr-1"></i> Descripción</strong>
 
-          <p class="text-muted">{{ $existe ? $micrositio[0]->descripcion : '..'}}</p>
+          <p class="text-muted">{{ $existe ? $micrositio->descripcion : '..'}}</p>
           <hr>
           </div>
           <!-- /.card-body -->
@@ -66,14 +66,14 @@
         <div class="card">
           <div class="card-header p-2">
             <ul class="nav nav-pills">
-              <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Actividad</a></li>
+              <li class="nav-item"><a class="nav-link" href="#activity" data-toggle="tab">Actividad</a></li>
               <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Productos</a></li>
-              <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Ajustes</a></li>
+              <li class="nav-item"><a class="nav-link active"  href="#settings" data-toggle="tab">Ajustes</a></li>
             </ul>
           </div><!-- /.card-header -->
           <div class="card-body">
             <div class="tab-content">
-              <div class="active tab-pane" id="activity">
+              <div class="tab-pane" id="activity">
                 <!-- Post -->
                 <div class="alert alert-info" role="alert">
                   No hay actividad reciente!
@@ -106,10 +106,10 @@
                               </div>
                               <div class="card-footer">
                                 <div class="text-right">
-                                  <a title="deshabilitar producto" href="{{route('productos.destroy',['id'=>$item->id])}}" class="btn btn-sm bg-danger">
-                                    <i class="fa fa-power-off"></i>
+                                  <a title="Eliminar producto" href="{{route('productos.destroy',['id'=>$item->id])}}" class="btn btn-sm bg-danger">
+                                    <i class="fa fa-trash"></i>
                                   </a>
-                                  <a title="Editar información" href="#" class="btn btn-sm btn-primary">
+                                  <a title="Editar información" href="#" class="btn btn-sm btn-warning">
                                     <i class="fas fa-wrench"></i>
                                   </a>
                                 </div>
@@ -119,7 +119,7 @@
                         @endforeach
                       @else
                         <div class="alert alert-primary" role="alert">
-                          No hay productos disponibles, da <a href="{{ route('productos.crear')}}" class="alert-link">este link</a> para agregar un producto nuevo.
+                          No hay productos disponibles, da click <a href="{{ route('productos.crear')}}" style="color: crimson" class="alert-link">aqui</a> para agregar un producto nuevo.
                         </div>
                       @endif  
                     </div>
@@ -129,13 +129,7 @@
                     <nav aria-label="Contacts Page Navigation">
                       <ul class="pagination justify-content-center m-0">
                         <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">4</a></li>
-                        <li class="page-item"><a class="page-link" href="#">5</a></li>
-                        <li class="page-item"><a class="page-link" href="#">6</a></li>
-                        <li class="page-item"><a class="page-link" href="#">7</a></li>
-                        <li class="page-item"><a class="page-link" href="#">8</a></li>
+
                       </ul>
                     </nav>
                   </div>
@@ -145,9 +139,9 @@
               </div>
               <!-- /.tab-pane -->
 
-              <div class="tab-pane" id="settings">
+              <div class="active tab-pane" id="settings">
                @if($existe)
-                  <form class="form-horizontal" id="formSettings" method="post" action="{{ route('micrositios.update',['id'=>$micrositio[0]->id])}}" enctype="multipart/form-data">
+                  <form class="form-horizontal" id="formSettings" method="post" action="{{ route('micrositios.update',['id'=>$micrositio->id])}}" enctype="multipart/form-data">
                @else
                   <form class="form-horizontal" id="formSettings" method="post" action="{{ route('micrositios.store')}}" enctype="multipart/form-data">
 
@@ -159,13 +153,19 @@
                   <div class="form-group row">
                     <label for="inputName" class="col-sm-2 col-form-label">Nombre</label>
                     <div class="col-sm-10">
-                    <input type="text" class="form-control" id="nombre" name="nombre" value="{{ $existe ? $micrositio[0]->nombre :''}}" placeholder="nombre">
+                    <input type="text" class="form-control @error('nombre') is-invalid @enderror" id="nombre" name="nombre" value="{{ $existe ? $micrositio->nombre :''}}" placeholder="nombre">
+                       @error('nombre')
+                          <div class="col-form-label" style="color:red;">{{ $message }}</div>
+                       @enderror
                     </div>
                   </div>
                   <div class="form-group row">
                     <label for="inputEmail" class="col-sm-2 col-form-label">Dirección</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="dirección" value="{{ $existe ? $micrositio[0]->direccion :''}}" name="direccion" placeholder="Dirección">
+                      <input type="text" class="form-control @error('direccion') is-invalid @enderror" id="dirección" value="{{ $existe ? $micrositio->direccion :''}}" name="direccion" placeholder="Dirección">
+                      @error('direccion')
+                         <div class="col-form-label" style="color:red;">{{ $message }}</div>
+                      @enderror 
                     </div>
                   </div>
                   <div class="form-group row">
@@ -181,19 +181,23 @@
                             <button class="btn btn-warning" id="btn_remove" >remover marcador</button>
                         </div><br>
                         <div class="col-sm-6">
-                        <input type="text" class="form-control" id="lat" name="lat" value="{{ $existe ? $micrositio[0]->lat : '' }}" placeholder="latitud" disabled >
+                        <input type="text" class="form-control" id="lat" name="lat" value="{{ $existe ? $micrositio->lat : '' }}" placeholder="latitud" disabled >
                         </div><br>
                         <div class="col-sm-6">
-                        <input type="text" class="form-control" id="lng" name="lng" value=" {{ $existe ? $micrositio[0]->lng : '' }}" placeholder="longitud" disabled>
+                        <input type="text" class="form-control" id="lng" name="lng" value=" {{ $existe ? $micrositio->lng : '' }}" placeholder="longitud" disabled>
                         </div>
                     </div>   
                     <div id ="mapaFormulario" class="col-sm-6" > </div> 
+                    @if ($errors->has('lat') || $errors->has('lng'))
+                    <div class="col-form-label col-sm-6" style="color:red;"><center>{{$errors->first('lat') }}</center></div>
+                    @endif
+                    <div id="error_type" class="col-form-label" style="color:red; display:none;"></div>
                   </div>
                   <div class="form-group row">
                     <label for="inputName2" class="col-sm-2 col-form-label">Categoria</label>
                     <select class="col-sm-10 custom-select" id="select_categoria" name="categoria">
                         @if($existe)
-                            <option value="{{ $micrositio[0]->id_categoria}}" selected>{{ $micrositio[0]->categoria}}</option>
+                            <option value="{{ $micrositio->id_categoria}}" selected>{{ $micrositio->categoria}}</option>
                          @else
                             <option value="" selected disabled>selecciona una categoria..</option>    
                         @endif
@@ -208,7 +212,7 @@
                     <label for="inputLogo" class="col-sm-2 col-form-label">Logo</label>
                     <div class=" col-sm-10 input-group">
                       <div class="col-sm-10 custom-file">
-                        <input type="file" class="custom-file-input form-control" id="logo"  value="{{ $existe ? $micrositio[0]->logo_url :''}}" name="logo" placeholder="Logo">
+                        <input type="file" class="custom-file-input form-control" id="logo"  value="{{ $existe ? $micrositio->logo_url :''}}" name="logo" placeholder="Logo">
                         <label class="custom-file-label" for="exampleInputFile">Cargar Imagen</label>
                       </div>
                     </div>
@@ -218,7 +222,7 @@
                     <label for="inputName2" class="col-sm-2 col-form-label">Estado</label>
                     <select class="col-sm-10 custom-select" id="select_estado" name="estado">
                         @if($existe)
-                            <option value="{{ $micrositio[0]->id_estado}}" selected>{{ $micrositio[0]->estado}}</option>
+                            <option value="{{ $micrositio->id_estado}}" selected>{{ $micrositio->estado}}</option>
                          @else
                             <option value="" selected disabled>selecciona un esado..</option>    
                         @endif
@@ -232,7 +236,7 @@
                     <select class=" col-sm-10 custom-select" id="select_municipio" name="municipio" {{ $existe ? '' : 'disabled' }}>
 
                         @if($existe)
-                            <option value="{{ $micrositio[0]->id_municipio}}" selected>{{ $micrositio[0]->municipio}}</option>
+                            <option value="{{ $micrositio->id_municipio}}" selected>{{ $micrositio->municipio}}</option>
                          @else
                             <option value=""selected disabled>selecciona un municipio..</option>    
                         @endif
@@ -241,7 +245,10 @@
                   <div class="form-group row">
                     <label for="inputExperience" class="col-sm-2 col-form-label">descripción</label>
                     <div class="col-sm-10">
-                    <textarea class="form-control" id="descripcion" name="descripcion" placeholder="Descripcion">{{ $existe ? $micrositio[0]->descripcion :''}}</textarea>
+                    <textarea class="form-control @error('descripcion') is-invalid @enderror" id="descripcion" name="descripcion" placeholder="Descripcion">{{ $existe ? $micrositio->descripcion :''}}</textarea>
+                    @error('descripcion')
+                    <div class="col-form-label" style="color:red;">{{ $message }}</div>
+                    @enderror  
                     </div>
                   </div>
 

@@ -70,11 +70,12 @@ class AjaxController extends Controller
          $m_activos = Micrositio::where('id_estatus',1)->count();
          $m_incativos = Micrositio::where('id_estatus',2)->count();
          $m_suspendidos = Micrositio::where('id_estatus',3)->count();
-         $m_rechazados = Micrositio::where('id_estatus',4)->count();
-
+         $m_pendientes = Micrositio::where('id_estatus',4)->count();
+         $m_rechazados = Micrositio::where('id_estatus',5)->count();
+         $m_nuevos = Micrositio::where('id_estatus',6)->count();
 
          $contadores = array('p_activos'=>$p_activos,'p_inactivos'=>$p_incativos,
-                             'm_activos'=>$m_activos,'m_inactivos'=>$m_incativos,'m_suspendidos'=>$m_suspendidos,'m_rechazados'=>$m_rechazados);  
+                             'm_activos'=>$m_activos,'m_inactivos'=>$m_incativos,'m_suspendidos'=>$m_suspendidos,'m_pendientes'=>$m_pendientes,'m_rechazados'=>$m_rechazados,'m_nuevos'=>$m_nuevos);  
                               
          return json_encode($contadores);
 

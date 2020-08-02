@@ -39,20 +39,21 @@
                         </div>
                         </div>
                     </div>
-
-                    <div class="form-group">
-                        <label for="micrositios">Micrositio</label>
-                        <select class="form-control" name="micrositio" id="" required>
-                            <option value="" disabled selected>selecciona un Micrositio</option>
-                            @foreach ($micrositios as $item)
-                                <option value="{{$item->id}}">{{$item->nombre}}</option>   
-                            @endforeach
-                        </select>
-                        @if ($errors->has('micrositio'))
-                        <div class="col-form-label" style="color:red;">{{$errors->first('micrositio')}}</div>
-                        @endif
-                        <div id="error_type" class="col-form-label" style="color:red; display:none;"></div>
-                    </div>
+                    @if(Auth::user()->type==1)
+                        <div class="form-group">
+                            <label for="micrositios">Micrositio</label>
+                            <select class="form-control" name="micrositio" id="" required>
+                                <option value="" disabled selected>selecciona un Micrositio</option>
+                                @foreach ($micrositios as $item)
+                                    <option value="{{$item->id}}">{{$item->nombre}}</option>   
+                                @endforeach
+                            </select>
+                            @if ($errors->has('micrositio'))
+                            <div class="col-form-label" style="color:red;">{{$errors->first('micrositio')}}</div>
+                            @endif
+                            <div id="error_type" class="col-form-label" style="color:red; display:none;"></div>
+                        </div>
+                    @endif
                     </div>
                     <!-- /.card-body -->
 

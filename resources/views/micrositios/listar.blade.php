@@ -45,7 +45,13 @@
                         <span class="badge bg-warning">suspendido</span>
                             @break
                         @case(4)
+                        <span class="badge badge-info">pendiente</span> 
+                            @break>   
+                        @case(5)
                         <span class="badge badge-dark">rechazado</span> 
+                        @break   
+                        @case(6)
+                        <span class="badge badge-info">nuevo</span> 
                         @break   
                     @endswitch
                 </td>

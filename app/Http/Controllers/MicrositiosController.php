@@ -8,6 +8,8 @@ use App\Micrositio;
 use App\Producto;
 use App\municipio;
 use App\Estatus;
+use App\Venta;
+use App\Servicio;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
@@ -20,32 +22,58 @@ class MicrositiosController extends Controller
      */
     public function index()
     {
- 
-       $micrositio =  DB::table('micrositios')
-                ->where('id_empresario','=',Auth::user()->id)
-                ->join('categorias as c','c.id','micrositios.id_categoria')
-                ->join('estados as e','e.id','micrositios.id_estado')
-                ->join('municipios as m','m.id','micrositios.id_municipio')
-                ->select('micrositios.*','c.nombre as categoria','e.nombre as estado','m.municipio')
-
-                ->get();
-
-
        //se valida si existe un micrositio actualmente         
-        $existe = sizeof($micrositio)==0 ? false : true ;
-        
-        //si el micrositio existe se obtienen los productos
-        $productos = Producto::where([['id_micrositio',$micrositio[0]->id],
-                                      ['id_estatus',1]
-                                        ])->get(); 
+       $existe = Micrositio::where('id_empresario',Auth::user()->id)->get()->count() == 0 ? false : true ;
 
-        
+       $p=0;$s=0;$v=0;
+       $productos= array();
+       $micrositio = null; 
+        //si es la primera vez que se accede a la vista de "mi micrositio" se genera el registro del micrositio 
+        if($existe){
+            $id_micrositio = Micrositio::where('id_empresario',Auth::user()->id)->first()->id;
+
+            $micrositio =  DB::table('micrositios')
+            ->where('id_empresario','=',Auth::user()->id)
+            ->join('categorias as c','c.id','micrositios.id_categoria')
+            ->join('estados as e','e.id','micrositios.id_estado')
+            ->join('municipios as m','m.id','micrositios.id_municipio')
+            ->select('micrositios.*','c.nombre as categoria','e.nombre as estado','m.municipio')
+            ->get()[0];
+
+           // dd($micrositio);
+            //si el micrositio existe se obtienen los productos
+            $productos = Producto::where([['id_micrositio',$id_micrositio],
+                                        ['id_estatus',1]] )->get(); 
+                                            
+            // se contabilizan los registros
+            $p = Producto::where([['id_estatus',1],['id_micrositio',$id_micrositio]])->count();
+            $s = Servicio::where([['id_estatus',1],['id_micrositio',$id_micrositio]])->count();
+            $v = Venta::where([['id_estatus',1],['id_empresario',Auth::user()->id]])->count();
+        }else{
+            Micrositio::create([
+                "nombre" => '',
+                "direccion" => "",
+                "id_categoria" => 1,
+                "id_estado" => 1,
+                "id_municipio" => 1,
+                "descripcion" => '',
+                "id_estatus" =>6,
+                "id_empresario" => Auth::user()->id,
+                "lat"=>0,
+                "lng"=>0,
+                "logo_url" =>"/logos/default.png"
+            ]);
+
+        }
+
+        //se almacenan en un arreglo
+        $contadores = array($p,$s,$v);
+
+        //se obtienten los datos de estados y  categorias
         $estados = Estado::all();
         $categorias = Categoria::all();
 
-
-   
-        return view('micrositios.index',compact('micrositio','existe','estados','categorias','productos'));
+        return view('micrositios.index',compact('micrositio','existe','estados','categorias','productos','contadores'));
     }
 
     public function listar(){
@@ -75,6 +103,25 @@ class MicrositiosController extends Controller
     public function store()
     {
 
+
+       $v =  Request()->validate([
+            "nombre"  => "required|max:100",
+            "direccion"  =>"required| max:130",
+            "descripcion" =>"required|:max:255",
+            "lat" => 'required',
+            "lng"  =>'required'
+        ],[
+            "nombre.required"=>"Es necesario el nombre del establecimiento.",
+            "nombre.max:100"=>"El nombre solo puede tener 100 caracteres como maximo.",
+            "direccion.required"=>"Es necesario el nombre del establecimiento.",
+            "direccion.max:130"=>"La dirección solo puede tener 130 caracteres como maximo.",
+            "descripcion.required"=>"Es necesaria la descripción del establecimiento.",
+            "descripcion.max:1255"=>"La descripción solo puede tener 255 caracteres como maximo.",
+            "lat.required" => "debes de elegir una ubicación",
+            "lng.required" => "Debes de elegir una ubicación"
+        ]);
+
+
        if(Request()->hasFile('logo')){
             $file = Request()->file('logo');
             $name = $file->getClientOriginalName();
@@ -84,7 +131,6 @@ class MicrositiosController extends Controller
             $name ="default.png";
        }
 
-     //  dd(Request('lat'));
 
        Micrositio::create([
         "nombre" => Request('nombre'),
@@ -145,7 +191,7 @@ class MicrositiosController extends Controller
     public function update($id)
     {
 
-        $v = Request()->validate([
+        Request()->validate([
             "nombre"  => "required|max:100",
             "direccion"  =>"required| max:130",
             "descripcion" =>"required|:max:255",
@@ -162,7 +208,7 @@ class MicrositiosController extends Controller
             "lng.required" => "Debes de elegir una ubicación"
         ]);
 
-
+         
         if(Request()->hasFile('logo')){
             $file = Request()->file('logo');
             $name = $file->getClientOriginalName();
@@ -172,8 +218,6 @@ class MicrositiosController extends Controller
             $name = "default.png";
         }
 
-
-             // dd(Request('lat'));
 
        $micrositio = Micrositio::find($id);
        // dd($micrositio);

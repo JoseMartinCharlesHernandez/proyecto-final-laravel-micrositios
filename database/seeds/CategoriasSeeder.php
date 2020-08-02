@@ -11,7 +11,7 @@ class CategoriasSeeder extends Seeder
      */
     public function run()
     {
-        $categorias = array('comida','ferreteria','abarrotes','limpieza','plomeria','dulceria',
+        $categorias = array('sin asignar','comida','ferreteria','abarrotes','limpieza','plomeria','dulceria',
                             'comida rapida','muebleria','zapateria','papeleria','snacks');
 
         foreach ($categorias as $categoria) {         
