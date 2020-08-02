@@ -6,116 +6,117 @@
     <!-- Small boxes (Stat box) -->
     @if (Auth::user()->type==1)
         
-    <div class="row">
-      <div class="col-lg-3 col-6">
-        <!-- small box -->
-        <div class="small-box bg-info">
-          <div class="inner">
-          <h3>{{ $conteo["ventas"] }}</h3>
+          <div class="row">
+            <div class="col-lg-3 col-6">
+              <!-- small box -->
+              <div class="small-box bg-info">
+                <div class="inner">
+                <h3>{{ $conteo["ventas"] }}</h3>
 
-            <p>Ventas</p>
-          </div>
-          <div class="icon">
-            <i class="ion ion-bag"></i>
-          </div>
-          <a href="{{route('ventas.listar')}}" class="small-box-footer">Más información<i class="fas fa-arrow-circle-right"></i></a>
-        </div>
-      </div>
-      <!-- ./col -->
-      <div class="col-lg-3 col-6">
-        <!-- small box -->
-        <div class="small-box bg-success">
-          <div class="inner">
-          <h3>{{ $conteo["micrositios"] }}<sup style="font-size: 20px"></sup></h3>
+                  <p>Ventas</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-bag"></i>
+                </div>
+                <a href="{{route('ventas.listar')}}" class="small-box-footer">Más información<i class="fas fa-arrow-circle-right"></i></a>
+              </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-6">
+              <!-- small box -->
+              <div class="small-box bg-success">
+                <div class="inner">
+                <h3>{{ $conteo["micrositios"] }}<sup style="font-size: 20px"></sup></h3>
 
-            <p>Micrositios</p>
-          </div>
-          <div class="icon">
-            <i class="fa fas fa-cubes"></i>
-          </div>
-          <a href="{{route('micrositios.listar')}}" class="small-box-footer">Más información<i class="fas fa-arrow-circle-right"></i></a>
-        </div>
-      </div>
-      <!-- ./col -->
-      <div class="col-lg-3 col-6">
-        <!-- small box -->
-        <div class="small-box bg-warning">
-          <div class="inner">
-          <h3>{{ $conteo["usuarios"]}}</h3>
+                  <p>Micrositios</p>
+                </div>
+                <div class="icon">
+                  <i class="fa fas fa-cubes"></i>
+                </div>
+                <a href="{{route('micrositios.listar')}}" class="small-box-footer">Más información<i class="fas fa-arrow-circle-right"></i></a>
+              </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-6">
+              <!-- small box -->
+              <div class="small-box bg-warning">
+                <div class="inner">
+                <h3>{{ $conteo["usuarios"]}}</h3>
 
-            <p>Usuarios Registrados</p>
-          </div>
-          <div class="icon">
-            <i class="fas fa-users"></i>
-          </div>
-        <a href="{{route('usuarios.listar')}}" title="ver listado de usuarios" class="small-box-footer">Más información<i class="fas fa-arrow-circle-right"></i></a>
-        </div>
-      </div>
-      <!-- ./col -->
-      <div class="col-lg-3 col-6">
-        <!-- small box -->
-        <div class="small-box bg-danger">
-          <div class="inner">
-          <h3>{{ $conteo["productos"] }}</h3>
+                  <p>Usuarios Registrados</p>
+                </div>
+                <div class="icon">
+                  <i class="fas fa-users"></i>
+                </div>
+              <a href="{{route('usuarios.listar')}}" title="ver listado de usuarios" class="small-box-footer">Más información<i class="fas fa-arrow-circle-right"></i></a>
+              </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-6">
+              <!-- small box -->
+              <div class="small-box bg-danger">
+                <div class="inner">
+                <h3>{{ $conteo["productos"] }}</h3>
 
-            <p>Productos registrados</p>
+                  <p>Productos registrados</p>
+                </div>
+                <div class="icon">
+                  <i class="fas fa-box"></i>
+                </div>
+              <a href="{{ route('productos.listar')}}" class="small-box-footer" title="ver todos los productos">Más información <i class="fas fa-arrow-circle-right"></i></a>
+              </div>
+            </div>
+            <!-- ./col -->
           </div>
-          <div class="icon">
-            <i class="fas fa-box"></i>
-          </div>
-        <a href="{{ route('productos.listar')}}" class="small-box-footer" title="ver todos los productos">Más información <i class="fas fa-arrow-circle-right"></i></a>
-        </div>
-      </div>
-      <!-- ./col -->
-    </div>
-    <!-- /.row -->
+          <!-- /.row -->
 
     @endif
-    <div class="row">
+    <div class="row"> 
+      
       @if (Auth::user()->type==1)
-          
-      <div class="col-md-6">
-        <!-- DONUT CHART -->
-        <div class="card card-success">
-            <div class="card-header">
-            <h3 class="card-title">Estadisticas de Micrositios</h3>
+              
+          <div class="col-md-6">
+            <!-- DONUT CHART -->
+            <div class="card card-success">
+                <div class="card-header">
+                <h3 class="card-title">Estadisticas de Micrositios</h3>
 
-            <div class="card-tools">
-                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+                </div>
+                </div>
+                <div class="card-body">
+                <canvas id="donutChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                </div>
+                <!-- /.card-body -->
             </div>
-            </div>
-            <div class="card-body">
-            <canvas id="donutChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-            </div>
-            <!-- /.card-body -->
-        </div>
-          <!-- /.card -->
-        </div> 
-        @endif
+              <!-- /.card -->
+            </div> 
 
 
-        <div class="col-md-6">
-          <!-- DONUT CHART -->
-          <div class="card card-primary">
-              <div class="card-header">
-              <h3 class="card-title">Estadisticas de Productos</h3>
-  
-              <div class="card-tools">
-                  <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
-                  </button>
-                  <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+            <div class="col-md-6">
+              <!-- DONUT CHART -->
+              <div class="card card-primary">
+                  <div class="card-header">
+                  <h3 class="card-title">Estadisticas de Productos</h3>
+      
+                  <div class="card-tools">
+                      <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                      </button>
+                      <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+                  </div>
+                  </div>
+                  <div class="card-body">
+                  <canvas id="donutChartProductos" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                  </div>
+                  <!-- /.card-body -->
               </div>
-              </div>
-              <div class="card-body">
-              <canvas id="donutChartProductos" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-              </div>
-              <!-- /.card-body -->
-          </div>
-            <!-- /.card -->
-          </div> 
+                <!-- /.card -->
+              </div> 
 
+       @endif
 
         <div class="col-md-12">
             <!-- mapa -->
@@ -239,7 +240,7 @@
         datasets: [
             {
             data: [700,500,400,600],
-            backgroundColor : ['#4cbd3d','#d62525', '#20c1b4','#f8d34a','#1f1f19','#4ee7dc'],
+            backgroundColor : ['#4cbd3d','#d62525', '#ef9a41','#f8d34a','#1f1f19','#4ee7dc'],
             }
         ]
         }

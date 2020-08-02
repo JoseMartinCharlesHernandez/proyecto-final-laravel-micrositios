@@ -17,7 +17,7 @@ class CreateVentasTable extends Migration
             $table->id();
             $table->string('producto', 100);	
             $table->integer('cantidad');
-            $table->float('total',8,6);
+            $table->double('total',8,2);
             $table->unsignedBigInteger('id_producto');
             $table->foreign('id_producto')->references('id')->on('productos');
             $table->unsignedBigInteger('id_empresario');

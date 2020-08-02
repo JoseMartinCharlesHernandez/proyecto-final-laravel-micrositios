@@ -19,7 +19,7 @@
                     <div class="card-body">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Nombre</label>
-                        <input type="text" class="form-control @error('nombre') is-invalid @enderror" id="nombre" placeholder="Nombre del Producto" name="nombre" value="{{$micrositio->nombre}}">                        
+                        <input type="text" class="form-control @error('nombre') is-invalid @enderror" id="nombre" placeholder="Nombre del Micrositio" name="nombre" value="{{$micrositio->nombre}}">                        
                         @error('nombre')
                             <div class="col-form-label" style="color:red;">{{ $message }}</div>
                         @enderror    

@@ -21,7 +21,7 @@ class VentasController extends Controller
           //si el usuario es empresario, solo se le muestran sus ventas  
             $ventas = DB::table('ventas as v')
             ->join('micrositios as m','m.id','v.id_micrositio')
-            ->where('id_empresario',Auth::user()->id)
+            ->where('m.id_empresario',Auth::user()->id)
             ->select('v.*','m.nombre as micrositio')->get();
         }
         return view('ventas.listar',compact('ventas'));
@@ -29,7 +29,7 @@ class VentasController extends Controller
 
     function create($id)
     { //se carga la ventana de venta del producto
-      $producto = Producto::find(1);
+      $producto = Producto::find($id);
       $micrositio = Micrositio::find($producto->id_micrositio);
       return view('ventas.create',compact('producto','micrositio'));
     }
@@ -37,6 +37,7 @@ class VentasController extends Controller
 
     public function store()
     {   // se almacena el producto 
+        //dd(Request('precio') * Request('cantidad'),);
         Venta::create(['producto'=>Request('nombre'),
                        'cantidad'=>Request('cantidad'),
                        'total'=> Request('precio') * Request('cantidad'),

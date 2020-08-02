@@ -51,7 +51,7 @@
                         <span class="badge badge-dark">rechazado</span> 
                         @break   
                         @case(6)
-                        <span class="badge badge-info">nuevo</span> 
+                        <span class="badge badge-primary">nuevo</span> 
                         @break   
                     @endswitch
                 </td>

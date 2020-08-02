@@ -53,7 +53,7 @@
           </li>
           <li class="nav-item has-treeview {{ explode('.',Route::currentRouteName())[0]=='productos' ? 'menu-open' : '' }}">
             <a href="#" class="nav-link {{ explode('.',Route::currentRouteName())[0]=='productos' ? 'active' : '' }}">
-              <i class="nav-icon fas fa-tags"></i>
+              <i class="nav-icon fa fa-cube"></i>
               <p>
                 Productos
                 <i class="fas fa-angle-left right"></i>
@@ -68,29 +68,6 @@
               </li>
               <li class="nav-item">
               <a href="{{ route('productos.listar') }}" class="nav-link {{ Route::is('productos.listar') ? 'active' : '' }}">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Listar</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item has-treeview {{ explode('.',Route::currentRouteName())[0]=='servicios' ? 'menu-open' : '' }}">
-            <a href="#" class="nav-link {{ explode('.',Route::currentRouteName())[0]=='servicios' ? 'active' : '' }}">
-              <i class="nav-icon fas fa-tags"></i>
-              <p>
-                Servicios
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-              <a href="{{ route('servicios.crear')}}" class="nav-link {{ Route::is('servicios.crear') ? 'active' : '' }}">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Agregar</p>
-                </a>
-              </li>
-              <li class="nav-item">
-              <a href="{{ route('servicios.listar') }}" class="nav-link {{ Route::is('servicios.listar') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Listar</p>
                 </a>
@@ -120,9 +97,9 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-credit-card"></i>
+          <li class="nav-item has-treeview {{ explode('.',Route::currentRouteName())[0]=='ventas' ? 'menu-open' : '' }}">
+            <a href="#" class="nav-link {{ explode('.',Route::currentRouteName())[0]=='ventas' ? 'active' : '' }}">
+              <i class="nav-icon fas fa-tags "></i>
               <p>
                 Ventas
                 <i class="fas fa-angle-left right"></i>
@@ -130,13 +107,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="../layout/top-nav.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Agregar</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="../layout/top-nav-sidebar.html" class="nav-link">
+              <a href="{{ route('ventas.listar') }}" class="nav-link {{ Route::is('ventas.listar') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Listar</p>
                 </a>

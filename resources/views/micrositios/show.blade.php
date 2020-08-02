@@ -24,10 +24,7 @@
               </div>
               <div class="card-footer">
                 <div class="text-right">
-                  <a title="contactar al vendedor" href="#" class="btn btn-sm bg-teal">
-                    <i class="fas fa-comments"></i>
-                  </a>
-                  <a href="#" class="btn btn-sm btn-warning">
+                <a href="{{route('ventas.create',['id'=>$item->id])}}" class="btn btn-sm btn-warning">
                     <i class="fa fa-shopping-cart"></i> Comprar
                   </a>
                 </div>
