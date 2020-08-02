@@ -251,7 +251,10 @@
                     @enderror  
                     </div>
                   </div>
-
+                  
+                  <!-- campo id deshabilitado para manager -->
+                 <input type="number" value="{{ $micrositio->id_estatus}}" name="id_estatus" hidden>
+                  
                   <div class="form-group row">
                     <div class="offset-sm-2 col-sm-10">
                       @if ($existe)
