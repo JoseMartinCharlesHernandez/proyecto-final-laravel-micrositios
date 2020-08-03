@@ -3,6 +3,9 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Arr;
+use App\User;
 
 class UserSeeder extends Seeder
 {
@@ -51,5 +54,20 @@ class UserSeeder extends Seeder
             'id_estatus' =>'1',
             'type' => 3,
         ]);
+
+        //creando usuarios random    
+        $respuesta = Http::get('https://randomuser.me/api/?inc=name,email,login,picture&page=3&results=30');
+        $usuarios = $respuesta->json();
+            foreach ($usuarios["results"] as $item) {
+          User::create([  
+            'name'=> $item["name"]["first"]." ".$item["name"]["last"],
+            'email'=>$item["email"],
+            'password'=>$item["login"]["password"],
+            'avatar_url'=> $item["picture"]["large"],
+            'id_estatus'=>Arr::random([1,2]),
+            'type'=>Arr::random([2.3]),
+          ]);
+
+        }
     }
 }

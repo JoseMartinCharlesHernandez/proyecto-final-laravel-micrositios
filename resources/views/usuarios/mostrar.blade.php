@@ -9,7 +9,8 @@
           <div class="card-body box-profile">
             <div class="text-center">
               <img class="profile-user-img img-fluid img-circle"
-                   src="https://api.adorable.io/avatars/285/{{$usuario->email}}.png"
+                  {{-- src="https://api.adorable.io/avatars/285/{{$usuario->email}}.png"--}}
+                       src="{{$usuario->avatar_url}}"
                    alt="User profile picture">
             </div>
 

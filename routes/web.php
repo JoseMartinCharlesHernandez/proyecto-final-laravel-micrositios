@@ -80,6 +80,7 @@ Route::get('/ventas/restore/{id}','VentasController@restore')->name('ventas.rest
 
 //ruta para test de funciones
 Route::get('/parse-json','TestController@json');
+Route::get('/get/randomUser','TestController@ApiRandom');
 
 
 //rutas de correo

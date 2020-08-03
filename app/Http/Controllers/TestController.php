@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Arr;
 
 class TestController extends Controller
 {
@@ -32,4 +34,31 @@ class TestController extends Controller
             }    
         }
     }
+/*
+    DB::table('users')->insert([
+        'name' => 'admin',
+        'email' => 'proyecto.final.laravel@gmail.com',
+        'password' => Hash::make('password'),
+        'id_estatus' =>'1',
+        'type' => 1,
+    ]);
+*/
+    public function ApiRandom(){
+        
+        $id_estatus = [1, 2];
+        $id_types = [2, 3];
+        $respuesta = Http::get('https://randomuser.me/api/?page=3&results=10');
+        $usuarios = $respuesta->json();
+        dd($usuarios["results"]);
+        foreach ($usuarios["results"] as $item) {
+            $item["name"]["first"]." ".$item["name"]["last"];
+            $item["email"];
+            $item["login"]["password"];
+           //'avatar_url'=> $item["picture"]["large"];
+            Arr::random([1,2]);
+            Arr::random([2.3]);
+
+        }
+    }
+
 }

@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('avatar_url',255)->default('storage/avatar_default.png');
+            $table->string('avatar_url',255)->default('avatar/default.jpg');
             $table->unsignedBigInteger('type');
             $table->foreign('type')->references('id')->on('tipos_usuarios');
             $table->rememberToken();
