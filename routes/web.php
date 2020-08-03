@@ -72,7 +72,7 @@ Route::get('/micrositios-mapa',function(){ return view('micrositios.mapa');})->n
 
 //rutas para ventas
 Route::get('/ventas/listar','VentasController@index')->name('ventas.listar');
-Route::get('/ventas/create/{id}','ventasController@create')->name('ventas.create');
+Route::get('/ventas/create/{id}','VentasController@create')->name('ventas.create');
 Route::get('/ventas/store','VentasController@store')->name('ventas.store');
 Route::get('/ventas/destroy/{id}','VentasController@destroy')->name('ventas.destroy');
 Route::get('/ventas/restore/{id}','VentasController@restore')->name('ventas.restore');
