@@ -29,27 +29,7 @@ class MicrositiosController extends Controller
        $productos= array();
        $micrositio = null; 
         //si es la primera vez que se accede a la vista de "mi micrositio" se genera el registro del micrositio 
-        if($existe){
-            $id_micrositio = Micrositio::where('id_empresario',Auth::user()->id)->first()->id;
-
-            $micrositio =  DB::table('micrositios')
-            ->where('id_empresario','=',Auth::user()->id)
-            ->join('categorias as c','c.id','micrositios.id_categoria')
-            ->join('estados as e','e.id','micrositios.id_estado')
-            ->join('municipios as m','m.id','micrositios.id_municipio')
-            ->select('micrositios.*','c.nombre as categoria','e.nombre as estado','m.municipio')
-            ->get()[0];
-
-           // dd($micrositio);
-            //si el micrositio existe se obtienen los productos
-            $productos = Producto::where([['id_micrositio',$id_micrositio],
-                                        ['id_estatus',1]] )->get(); 
-                                            
-            // se contabilizan los registros
-            $p = Producto::where([['id_estatus',1],['id_micrositio',$id_micrositio]])->count();
-            $s = Servicio::where([['id_estatus',1],['id_micrositio',$id_micrositio]])->count();
-            $v = Venta::where([['id_estatus',1],['id_empresario',Auth::user()->id]])->count();
-        }else{
+        if(!$existe){
             Micrositio::create([
                 "nombre" => '',
                 "direccion" => "",
@@ -62,9 +42,30 @@ class MicrositiosController extends Controller
                 "lat"=>0,
                 "lng"=>0,
                 "logo_url" =>"/logos/default.png"
-            ]);
-
+            ]);   
         }
+
+
+        $id_micrositio = Micrositio::where('id_empresario',Auth::user()->id)->first()->id;
+
+        $micrositio =  DB::table('micrositios')
+        ->where('id_empresario','=',Auth::user()->id)
+        ->join('categorias as c','c.id','micrositios.id_categoria')
+        ->join('estados as e','e.id','micrositios.id_estado')
+        ->join('municipios as m','m.id','micrositios.id_municipio')
+        ->select('micrositios.*','c.nombre as categoria','e.nombre as estado','m.municipio')
+        ->get()[0];
+
+       // dd($micrositio);
+        //si el micrositio existe se obtienen los productos
+        $productos = Producto::where([['id_micrositio',$id_micrositio],
+                                    ['id_estatus',1]] )->get(); 
+                                        
+        // se contabilizan los registros
+        $p = Producto::where([['id_estatus',1],['id_micrositio',$id_micrositio]])->count();
+        $s = Servicio::where([['id_estatus',1],['id_micrositio',$id_micrositio]])->count();
+        $v = Venta::where([['id_estatus',1],['id_empresario',Auth::user()->id]])->count();
+
 
         //se almacenan en un arreglo
         $contadores = array($p,$s,$v);
@@ -73,7 +74,7 @@ class MicrositiosController extends Controller
         $estados = Estado::all();
         $categorias = Categoria::all();
 
-        return view('micrositios.index',compact('micrositio','existe','estados','categorias','productos','contadores'));
+        return view('micrositios.index',compact('micrositio','estados','categorias','productos','contadores'));
     }
 
     public function listar(){
@@ -227,7 +228,7 @@ class MicrositiosController extends Controller
         $micrositio->id_estado = Request('estado');
         $micrositio->id_municipio = Request('municipio');
         $micrositio->descripcion = Request('descripcion');
-        $micrositio->id_estatus =Request('id_estatus');
+        $micrositio->id_estatus = Auth::user()->type==1 ? Request('id_estatus') : $micrositio->id_estatus;
         $micrositio->id_empresario = Request('listar') == 1 ? $micrositio->id_empresario :  Auth::user()->id;
         $micrositio->lat=Request('lat');
         $micrositio->lng=Request('lng');

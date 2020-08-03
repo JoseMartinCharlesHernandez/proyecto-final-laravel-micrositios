@@ -33,12 +33,12 @@ class ForgotPasswordController extends Controller
 
     public function resetPassword(){
 
-        Request()->validate([
-            'email' => 'required|exists:users'
-        ],[
-            'email.required'=>'Ingresa una dirección de correo',   
-            'email.exists' => 'El correo no existe.',
-        ]);
+            Request()->validate([
+                'email' => 'required|exists:users'
+            ],[
+                'email.required'=>'Ingresa una dirección de correo',   
+                'email.exists' => 'El correo no existe en nuestros registros.',
+            ]);
 
             $contador = User::where('email','=' ,Request('email'))->count();
              
@@ -51,8 +51,9 @@ class ForgotPasswordController extends Controller
                $user->password = Hash::make($password);
                $user->save();
 
-               Mail::to('1530438@upv.edu.mx')->queue(new RecuperarContrasenia($user,$password));
-               return 'se ha enviado un correo con la nueva contraseña';
+               Mail::to($user->email)->queue(new RecuperarContrasenia($user,$password));
+               return redirect()->route('login');
+               
             }
     }
 }

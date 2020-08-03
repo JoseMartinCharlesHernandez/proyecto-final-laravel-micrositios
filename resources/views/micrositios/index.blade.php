@@ -10,11 +10,11 @@
           <div class="card-body box-profile">
             <div class="text-center">
               <img class="profile-user-img img-fluid img-circle"
-            src="{{$existe ? $micrositio->logo_url : '/logos/default.png' }}" 
+            src="{{ $micrositio->logo_url}}" 
                    alt="User profile picture">
             </div>
 
-            <h3 class="profile-username text-center">{{ $existe ? $micrositio->nombre : 'nombre'}}</h3>
+            <h3 class="profile-username text-center">{{  $micrositio->nombre }}</h3>
 
             <ul class="list-group list-group-unbordered mb-3">
               <li class="list-group-item">
@@ -42,19 +42,19 @@
 
             <strong><i class="fas fa-map-marker-alt mr-1"></i> dirección</strong>
 
-               <p class="text-muted">{{ $existe ? $micrositio->direccion : 'direccion'}}</p>
+               <p class="text-muted">{{  $micrositio->direccion }}</p>
 
             <hr>
 
             <strong><i class="fas fa-map-marker-alt mr-1"></i> ubicación</strong>
 
-               <p class="text-muted">{{ $existe ? $micrositio->lat : 'lat'  }} , {{ $existe ? $micrositio->lng : 'long'}}</p>
+               <p class="text-muted">{{  $micrositio->lat  }} , {{  $micrositio->lng}}</p>
 
             <hr>
 
             <strong><i class="far fa-file-alt mr-1"></i> Descripción</strong>
 
-          <p class="text-muted">{{ $existe ? $micrositio->descripcion : '..'}}</p>
+          <p class="text-muted">{{  $micrositio->descripcion }}</p>
           <hr>
           </div>
           <!-- /.card-body -->
@@ -140,20 +140,14 @@
               <!-- /.tab-pane -->
 
               <div class="active tab-pane" id="settings">
-               @if($existe)
                   <form class="form-horizontal" id="formSettings" method="post" action="{{ route('micrositios.update',['id'=>$micrositio->id])}}" enctype="multipart/form-data">
-               @else
-                  <form class="form-horizontal" id="formSettings" method="post" action="{{ route('micrositios.store')}}" enctype="multipart/form-data">
-
-               @endif   
-
                     @csrf
 
                   <input type="number" name="listar" value="0" hidden>
                   <div class="form-group row">
                     <label for="inputName" class="col-sm-2 col-form-label">Nombre</label>
                     <div class="col-sm-10">
-                    <input type="text" class="form-control @error('nombre') is-invalid @enderror" id="nombre" name="nombre" value="{{ $existe ? $micrositio->nombre :''}}" placeholder="nombre">
+                    <input type="text" class="form-control @error('nombre') is-invalid @enderror" id="nombre" name="nombre" value="{{  $micrositio->nombre}}" placeholder="nombre">
                        @error('nombre')
                           <div class="col-form-label" style="color:red;">{{ $message }}</div>
                        @enderror
@@ -162,7 +156,7 @@
                   <div class="form-group row">
                     <label for="inputEmail" class="col-sm-2 col-form-label">Dirección</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control @error('direccion') is-invalid @enderror" id="dirección" value="{{ $existe ? $micrositio->direccion :''}}" name="direccion" placeholder="Dirección">
+                      <input type="text" class="form-control @error('direccion') is-invalid @enderror" id="dirección" value="{{  $micrositio->direccion}}" name="direccion" placeholder="Dirección">
                       @error('direccion')
                          <div class="col-form-label" style="color:red;">{{ $message }}</div>
                       @enderror 
@@ -181,10 +175,10 @@
                             <button class="btn btn-warning" id="btn_remove" >remover marcador</button>
                         </div><br>
                         <div class="col-sm-6">
-                        <input type="text" class="form-control" id="lat" name="lat" value="{{ $existe ? $micrositio->lat : '' }}" placeholder="latitud" disabled >
+                        <input type="text" class="form-control" id="lat" name="lat" value="{{  $micrositio->lat }}" placeholder="latitud" disabled >
                         </div><br>
                         <div class="col-sm-6">
-                        <input type="text" class="form-control" id="lng" name="lng" value=" {{ $existe ? $micrositio->lng : '' }}" placeholder="longitud" disabled>
+                        <input type="text" class="form-control" id="lng" name="lng" value=" {{  $micrositio->lng }}" placeholder="longitud" disabled>
                         </div>
                     </div>   
                     <div id ="mapaFormulario" class="col-sm-6" > </div> 
@@ -196,13 +190,8 @@
                   <div class="form-group row">
                     <label for="inputName2" class="col-sm-2 col-form-label">Categoria</label>
                     <select class="col-sm-10 custom-select" id="select_categoria" name="categoria">
-                        @if($existe)
-                            <option value="{{ $micrositio->id_categoria}}" selected>{{ $micrositio->categoria}}</option>
-                         @else
-                            <option value="" selected disabled>selecciona una categoria..</option>    
-                        @endif
                         @foreach ($categorias as $item)
-                            <option value="{{$item->id}}">{{ $item->nombre}}</option>
+                            <option value="{{$item->id}}" {{$item->id == $micrositio->id_categoria ?: 'selected' }} >{{ $item->nombre}}</option>
                         @endforeach
                     </select>
                   </div>
@@ -212,7 +201,7 @@
                     <label for="inputLogo" class="col-sm-2 col-form-label">Logo</label>
                     <div class=" col-sm-10 input-group">
                       <div class="col-sm-10 custom-file">
-                        <input type="file" class="custom-file-input form-control" id="logo"  value="{{ $existe ? $micrositio->logo_url :''}}" name="logo" placeholder="Logo">
+                        <input type="file" class="custom-file-input form-control" id="logo"  value="{{  $micrositio->logo_url}}" name="logo" placeholder="Logo">
                         <label class="custom-file-label" for="exampleInputFile">Cargar Imagen</label>
                       </div>
                     </div>
@@ -221,47 +210,30 @@
                   <div class="form-group row">
                     <label for="inputName2" class="col-sm-2 col-form-label">Estado</label>
                     <select class="col-sm-10 custom-select" id="select_estado" name="estado">
-                        @if($existe)
-                            <option value="{{ $micrositio->id_estado}}" selected>{{ $micrositio->estado}}</option>
-                         @else
-                            <option value="" selected disabled>selecciona un esado..</option>    
-                        @endif
                         @foreach ($estados as $item)
-                            <option value="{{$item->id}}">{{ $item->nombre}}</option>
+                            <option value="{{$item->id}}" {{ $micrositio->id_estado == $item->id ?: 'selected'}}>{{ $item->nombre}}</option>
                         @endforeach
                     </select>
                   </div>
                   <div class="form-group row">
                     <label for="inputName2" class="col-sm-2 col-form-label">Municipio</label>
-                    <select class=" col-sm-10 custom-select" id="select_municipio" name="municipio" {{ $existe ? '' : 'disabled' }}>
-
-                        @if($existe)
+                    <select class=" col-sm-10 custom-select" id="select_municipio" name="municipio">
                             <option value="{{ $micrositio->id_municipio}}" selected>{{ $micrositio->municipio}}</option>
-                         @else
-                            <option value=""selected disabled>selecciona un municipio..</option>    
-                        @endif
                     </select>
                   </div>
                   <div class="form-group row">
                     <label for="inputExperience" class="col-sm-2 col-form-label">descripción</label>
                     <div class="col-sm-10">
-                    <textarea class="form-control @error('descripcion') is-invalid @enderror" id="descripcion" name="descripcion" placeholder="Descripcion">{{ $existe ? $micrositio->descripcion :''}}</textarea>
+                    <textarea class="form-control @error('descripcion') is-invalid @enderror" id="descripcion" name="descripcion" placeholder="Descripcion">{{  $micrositio->descripcion}}</textarea>
                     @error('descripcion')
                     <div class="col-form-label" style="color:red;">{{ $message }}</div>
                     @enderror  
                     </div>
                   </div>
-                  
-                  <!-- campo id deshabilitado para manager -->
-                 <input type="number" value="{{ $micrositio->id_estatus}}" name="id_estatus" hidden>
-                  
+                                    
                   <div class="form-group row">
                     <div class="offset-sm-2 col-sm-10">
-                      @if ($existe)
                          <button type="submit" class="btn btn-success">Actualizar</button>
-                      @else
-                         <button type="submit" class="btn btn-primary">Guardar</button>
-                      @endif  
                     </div>
                   </div>
                 </form>

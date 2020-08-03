@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Mail\Mensajebienvenida;
 use App\Providers\RouteServiceProvider;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\TiposUsuario;
+use Illuminate\Support\Facades\Mail;
 
 class RegisterController extends Controller
 {
@@ -66,13 +68,18 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'id_estatus'=>1,
             'type' => $data['tipo_usuario'],
         ]);
+
+        //se manda correo con datos de registro
+        
+        Mail::to( $data['email'])->queue(new Mensajebienvenida($user,$data["password"]));
+        return $user;
     }
 
     protected function showRegistrationForm(){

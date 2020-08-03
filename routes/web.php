@@ -95,3 +95,5 @@ Route::get('/get-micrositios/{categoria}','AjaxController@getMicrositios')->name
 Route::get('/get-micrositios-palabra/{categoria}/{palabra}','AjaxController@getBySearch')->name('get.micrositios.palabra');
 Route::get('/get-data-donut','AjaxController@getDataDonut')->name('get.data.donut');
 Route::get('/send/quotation/emal','MensajeController@sendQuotation')->name('send.quotation');
+
+Route::get('/mostrar-email',function(){ return view('correo.recuperar-contrasenia');});
