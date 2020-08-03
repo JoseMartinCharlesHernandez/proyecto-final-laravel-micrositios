@@ -16,7 +16,7 @@
         <div class="image">
         <img 
             {{--src="https://api.adorable.io/avatars/285/{{Auth::user()->email}}.png" --}}
-        src="{{$Auth::user()->avatar_url}}"
+        src="{{Auth::user()->avatar_url}}"
             class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
