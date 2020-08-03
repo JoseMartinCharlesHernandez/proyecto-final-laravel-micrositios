@@ -3,7 +3,6 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
@@ -12,18 +11,25 @@ class MensajeCotizacion extends Mailable
     use Queueable, SerializesModels;
 
     public $subject= "Cotización de Productos";
-    public $data;
+    public $producto;
+    public $usuario;
+    public $micrositio;
+    public $total;
+    public $cantidad;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($producto,$usuario,$micrositio)
+    public function __construct($producto,$usuario,$micrositio,$total,$cantidad)
     {
         $this->producto = $producto;
         $this->usuario =$usuario; 
         $this->micrositio = $micrositio;
+        $this->total = $total;
+        $this->cantidad = $cantidad;
+        
     }
 
     /**

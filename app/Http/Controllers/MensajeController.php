@@ -60,11 +60,12 @@ class MensajeController extends Controller
     public function sendQuotation(){
         $producto =  Producto::find(Request("id_producto"));
         $micrositio = Micrositio::find(Request("id_micrositio"));
+        $total = Request('cantidad') * $producto->precio;    
         $usuario = User::find(Auth::user()->id);
-        Mail::to($usuario->email)->queue(new MensajeCotizacion($producto,$usuario,$micrositio));
+        Mail::to($usuario->email)->queue(new MensajeCotizacion($producto,$usuario,$micrositio,$total,Request('cantidad')));
       //  return new MensajeRecivido($data);
 
-       return json_encode(' al correo: '.$usuario->email);
+       return json_encode($usuario->email);
     }
 
     /**

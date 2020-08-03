@@ -116,7 +116,7 @@
 
         id_producto = document.getElementById('id_producto').value
         cantidad = document.getElementById('cantidad').value
-        id_micoristio = document.getElementById('id_micrositio').value
+        id_micrositio = document.getElementById('id_micrositio').value
         
         $.ajax({
           url: "/send/quotation/emal",
@@ -124,7 +124,7 @@
           data:{
               id_producto: id_producto,
               cantidad: cantidad,
-              id_micoristio: id_micoristio
+              id_micrositio: id_micrositio
           } , 
           success: function(respuesta) {
               console.log(JSON.parse(respuesta))

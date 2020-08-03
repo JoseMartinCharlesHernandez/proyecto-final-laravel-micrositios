@@ -10,7 +10,7 @@
     <body>
         <p style="color: blue"><b>Hola</b> {{$user->name}}</p>
         <p>la contraseña que se registró con tu email: <b style="color: cornflowerblue">{{$user->email}}</b> ha cambiado.</p>
-        <p>la nueva contraseña es: <b style="color: coral">{{$user->password}}</b></p>
+        <p>la nueva contraseña es: <b style="color: coral">{{$password}}</b></p>
         <a type="button" href="{{route('login')}}" class="btn btn-success">Iniciar Sesión</a>
     </body>
 </html>
