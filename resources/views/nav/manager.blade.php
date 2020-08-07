@@ -39,9 +39,9 @@
           </li>  
           <li class="nav-item has-treeview ">
           <a href="{{ route('home')}}" class="nav-link {{ Route::currentRouteName()=='home' ? 'active' : '' }}">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <i class="nav-icon fas fa-search"></i>
               <p>
-                Dashboard
+                Buscador
               </p>
             </a>
           </li>

@@ -41,4 +41,18 @@ class HomeController extends Controller
         //dd($conteo);
         return view('home',['conteo'=>$conteo,'categorias'=>$categorias,'micrositios'=>$micrositios]);
     }
+
+    public function welcome(){
+                //conteo de datos
+                $ventas      = Venta::all()->count();
+                $micrositios = Micrositio::all()->count();
+                $usuarios    = User::all()->count();  
+                $productos     = Producto::all()->count();  
+                $conteo      = array("ventas"=>$ventas, "micrositios"=>$micrositios, "usuarios" => $usuarios, "productos"=>$productos);
+                
+                $micrositios = Micrositio::all();
+                $categorias  = Categoria::all();
+                //dd($conteo);
+                return view('welcome',['conteo'=>$conteo,'categorias'=>$categorias,'micrositios'=>$micrositios]);
+    }
 }

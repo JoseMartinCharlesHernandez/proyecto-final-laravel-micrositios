@@ -3,6 +3,68 @@
 @section('content')
 
 <div class="container-fluid">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label for="inputName2" class="col-sm-2 col-form-label">Buscar</label>
+            <div class="input-group mb-6">
+              <input id="input_search" type="text" class="form-control">
+              <div class="input-group-append">
+                <span class="input-group-text"  id="btn_search"><i class="fas fa-search"></i></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <div class="card card-solid" id="card_1" hidden>
+        <div class="card-body pb-0">
+          <div class="row d-flex align-items-stretch" id="div_micrositios">
+             <!-- Aki se llena con los registros de la petición ajax de micrositios --> 
+          </div>
+        </div>
+      </div>
+  
+      <div class="card card-solid" id="card_2" hidden>
+        <div class="card-body pb-0">
+          <div class="row d-flex align-items-stretch" id="div_productos">
+             <!-- Aki se llena con los registros de la petición ajax de micrositios --> 
+          </div>
+        </div>
+      </div>
+    </div>
+  
+  
+    <div class="col-md-8">
+      <!-- mapa -->
+      <div class="card card-info">
+          <div class="card-header">
+  
+            <div class="card-tools">
+              <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+              </button>
+              <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+          </div>
+          </div>
+  
+          <div class="card-body">
+              <style> 
+                #map {
+                    width: 100%;    
+                    height: 600px;
+                }
+              </style>     
+            <section id ="map" > </section>               
+          </div>
+          <!-- /.card-body -->
+      </div>
+        <!-- /.card -->
+      </div>
+
+  </div> 
+
     <!-- Small boxes (Stat box) -->
     @if (Auth::user()->type==1)
         
@@ -116,99 +178,8 @@
                 <!-- /.card -->
               </div> 
 
-       @endif
-
-        <div class="col-md-12">
-            <!-- mapa -->
-            <div class="card card-info">
-                <div class="card-header">
-
-                  <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
-                    </button>
-                    <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
-                </div>
-                </div>
-
-                <div class="card-body">
-                    <style> 
-                      #map {
-                          width: 100%;    
-                          height: 600px;
-                      }
-                    </style>     
-                  <section id ="map" > </section>               
-                </div>
-                <!-- /.card-body -->
-            </div>
-              <!-- /.card -->
-            </div>       
+       @endif      
               
-            <div class="col-md-12">
-              <div class="row">
-                <div class="col-sm-6">
-                  <!-- text input -->
-                  <div class="form-group">
-                    <label for="inputName2" class="col-sm-2 col-form-label">Categoria</label>
-                    <select class="col-sm-10 custom-select" id="select_categoria" name="categoria">
-                        <option value="-1" selected>Mostrar todos los negocios</option>   
-                        @foreach ($categorias as $item)
-                            <option value="{{$item->id}}">{{ $item->nombre}}</option>
-                        @endforeach
-                    </select>
-                  </div>
-                </div>
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <label for="inputName2" class="col-sm-2 col-form-label">Buscar</label>
-                    <div class="input-group mb-6">
-                      <input id="input_search" type="text" class="form-control">
-                      <div class="input-group-append">
-                        <span class="input-group-text" onclick="getBySearch();" id="btn_search"><i class="fas fa-search"></i></span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="card card-solid">
-                <div class="card-body pb-0">
-                  <div class="row d-flex align-items-stretch" id="div_micrositios">
-                     <!-- Aki se llena con los registros de la petición ajax de micrositios --> 
-                  </div>
-                </div>
-                <!-- /.card-body -->
-                <div class="card-footer">
-                  <nav aria-label="Contacts Page Navigation">
-                    <ul class="pagination justify-content-center m-0">
-                      <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                      <li class="page-item"><a class="page-link" href="#">..</a></li>
-                    </ul>
-                  </nav>
-                </div>
-                <!-- /.card-footer -->
-              </div>
-
-
-              <div class="card card-solid">
-                <div class="card-body pb-0">
-                  <div class="row d-flex align-items-stretch" id="div_productos">
-                     <!-- Aki se llena con los registros de la petición ajax de micrositios --> 
-                  </div>
-                </div>
-                <!-- /.card-body -->
-                <div class="card-footer">
-                  <nav aria-label="Contacts Page Navigation">
-                    <ul class="pagination justify-content-center m-0">
-                      <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                      <li class="page-item"><a class="page-link" href="#">..</a></li>
-                    </ul>
-                  </nav>
-                </div>
-                <!-- /.card-footer -->
-              </div>
-
-            </div>
     </div>
 
     <!-- /.row (main row) -->
@@ -370,7 +341,7 @@
     console.log(item)
 
     document.getElementById('div_micrositios').innerHTML += `
-    <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch">
+    <div class="col-12 col-sm-6 col-md-12 d-flex align-items-stretch">
       <div class="card bg-light">
         <div class="card-header text-muted border-bottom-0">
         </div>
@@ -403,7 +374,7 @@
     console.log(item)
 
     document.getElementById('div_productos').innerHTML += `
-    <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch">
+    <div class="col-12 col-sm-6 col-md-12 d-flex align-items-stretch">
       <div class="card bg-light">
         <div class="card-header text-muted border-bottom-0">
         </div>
@@ -478,21 +449,9 @@
 
 
     //se coloca un event listener para hacer las busquedas de micrositios con la barra de busqueda
-    function getBySearch(){
-
-      var busqueda = document.getElementById('input_search').value;
-      var categoria = $("#select_categoria option:selected").val();
-      //console.log("categoria: "+categoria);
-      //console.log("busquda: "+busqueda);
-      if(busqueda == ""){
-          console.log("campo de busqueda vacio")
-      }else{
-        
+    function getBySearch(busqueda){
         $.ajax({
-          url: 'get-micrositios-palabra/'+categoria+'/'+busqueda,
-          data:{
-              categoria : categoria,
-          },
+          url: 'get-search/'+busqueda,
           success: function(respuesta) {
 
               //console.log(respuesta);
@@ -534,16 +493,34 @@
           }
       });
 
-      }
     }
 
 
 
     $( window ).on( "load", function() {
-       //por defecto se van a acargar todos los micrositios  
-       getMicrositios(-1)
        getDataDonut()
+       document.getElementById('input_search').addEventListener('keyup', (event) => {
+                      var s = document.getElementById('input_search').value      
+                      if(s.length>=3){
+                         getBySearch(s);
+                         setStateDivSearch(false)
+                       }
+                      if(s.length==0){
+                        document.getElementById('div_productos').innerHTML = ``;
+                        document.getElementById('div_micrositios').innerHTML = ``;
+                        deleteMarkers()
+                        setStateDivSearch(true)
+                      }
+                  });
+
     });
+
+
+    function setStateDivSearch(state){
+      document.getElementById("card_1").hidden = state
+      document.getElementById("card_2").hidden = state
+
+    }
     
 </script>
 @endsection

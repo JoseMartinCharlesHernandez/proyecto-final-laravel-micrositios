@@ -30,7 +30,7 @@ class AjaxController extends Controller
         return json_encode($micrositios);
     }
 
-    
+
     public function getBySearch($categoria,$palabra){
         if($categoria == -1){                //se obtienen solo los productos y micrositios que estén en estatus activo == 1   
             $micrositios = Micrositio::where([['id_estatus',1],
@@ -54,6 +54,26 @@ class AjaxController extends Controller
                                       'm.id as id_micrositio','m.nombre as nombre','m.descripcion','m.lat','m.lng')
                             ->get();
         }    
+
+        $respuesta = array('micrositios'=>$micrositios, 'productos'=>$productos);
+
+        return json_encode($respuesta);
+    }
+
+
+    public function getSearch($palabra){
+                     //se obtienen solo los productos y micrositios que estén en estatus activo == 1   
+        
+            $micrositios = Micrositio::where([['id_estatus',1],
+                                              ['nombre','like',$palabra.'%']])->get();
+            $productos = Producto::
+                                join('micrositios as m','m.id','productos.id_micrositio')
+                                ->where([['productos.nombre','like',$palabra.'%'],
+                                        ['productos.id_estatus',1] ]) 
+                                ->select("productos.nombre as producto","productos.precio","productos.imagen_url","productos.id",
+                                         'm.id as id_micrositio','m.nombre as nombre','m.lat','m.lng')
+                                ->get();
+  
 
         $respuesta = array('micrositios'=>$micrositios, 'productos'=>$productos);
 

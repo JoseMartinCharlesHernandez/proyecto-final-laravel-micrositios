@@ -1,13 +1,17 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
-
-Route::get('/', function () {
-    return view('welcome');
-});
+use App\Micrositio;
+use App\User;
+use App\Venta;
+use App\Categoria;
+use App\Producto;
 
 Auth::routes();
+
+Route::get('/', function (){
+    return view('welcome');
+});
 
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -67,7 +71,7 @@ Route::post('/micrositios/update/{id}','MicrositiosController@update')->name('mi
 Route::get('/micrositios/destroy/{id}','MicrositiosController@destroy')->name('micrositios.destroy');
 Route::get('/micrositios/restore/{id}','MicrositiosController@restore')->name('micrositios.restore');
 Route::get('/micrositios/edit/{id}','MicrositiosController@edit')->name('micrositios.edit');
-Route::get('/micrositios-mapa',function(){ return view('micrositios.mapa');})->name('micrsitios.mapa');
+//Route::get('/micrositios-mapa',function(){ return view('micrositios.mapa');})->name('micrsitios.mapa');
 
 
 //rutas para ventas
@@ -93,7 +97,8 @@ Route::get('mail-enviado','MensajeController@store');
 Route::get('/get-municipios/{estado}','AjaxController@getMunicipios')->name('get.municipios');
 Route::get('/get-micrositios/{categoria}','AjaxController@getMicrositios')->name('get.micrositios');
 Route::get('/get-micrositios-palabra/{categoria}/{palabra}','AjaxController@getBySearch')->name('get.micrositios.palabra');
+Route::get('/get-search/{palabra}','AjaxController@getSearch')->name('get.search');
 Route::get('/get-data-donut','AjaxController@getDataDonut')->name('get.data.donut');
 Route::get('/send/quotation/emal','MensajeController@sendQuotation')->name('send.quotation');
 
-Route::get('/mostrar-email',function(){ return view('correo.recuperar-contrasenia');});
+//Route::get('/mostrar-email',function(){ return view('correo.recuperar-contrasenia');});

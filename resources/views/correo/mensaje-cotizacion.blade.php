@@ -6,17 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <style>
-        table
-            {
-                border-collapse: collapse; 
-            }
-            td,th
-            {
-                border: 1px solid black;
-            }
+      table, th, td {
+        border: 1px solid black;
+      }
     </style>
+</head>
+<body>
     <label for="">cotización de <b style="color: blue">{{$micrositio->nombre}}</b></label><br><br>
-    <table class="egt">
+    <table >
         <tr>
           <th>Producto</th>
           <th>Cantidad</th>
