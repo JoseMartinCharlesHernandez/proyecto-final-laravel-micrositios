@@ -71,46 +71,11 @@
 @section('js')
 
 
-<!-- Ekko Lightbox -->
-<script src="../plugins/ekko-lightbox/ekko-lightbox.min.js"></script>
-<!-- AdminLTE App -->
-<script src="../dist/js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="../dist/js/demo.js"></script>
-<!-- Filterizr-->
-<script src="../plugins/filterizr/jquery.filterizr.min.js"></script>
-<!-- Page specific script -->
-<script>
-  $(function () {
-    $(document).on('click', '[data-toggle="lightbox"]', function(event) {
-      event.preventDefault();
-      $(this).ekkoLightbox({
-        alwaysShowClose: true
-      });
-    });
-
-    $('.filter-container').filterizr({gutterPixels: 3});
-    $('.btn[data-filter]').on('click', function() {
-      $('.btn[data-filter]').removeClass('active');
-      $(this).addClass('active');
-    });
-  })
-</script>
-
     <script>
         $(function () {
           $("#example1").DataTable({
             "responsive": true,
             "autoWidth": false,
-          });
-          $('#example2').DataTable({
-            "paging": true,
-            "lengthChange": false,
-            "searching": false,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false,
-            "responsive": true,
           });
         });
       </script>

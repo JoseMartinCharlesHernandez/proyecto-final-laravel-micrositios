@@ -75,7 +75,7 @@ Route::get('/micrositios/edit/{id}','MicrositiosController@edit')->name('microsi
 
 
 //rutas para ventas
-Route::get('/ventas/listar','VentasController@index')->name('ventas.listar');
+Route::get('/ventas-listar','VentasController@index')->name('ventas.listar');
 Route::get('/ventas/create/{id}','VentasController@create')->name('ventas.create');
 Route::get('/ventas/store','VentasController@store')->name('ventas.store');
 Route::get('/ventas/destroy/{id}','VentasController@destroy')->name('ventas.destroy');

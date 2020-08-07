@@ -148,7 +148,7 @@
           </li>
           <li class="nav-item has-treeview {{ explode('.',Route::currentRouteName())[0]=='ventas' ? 'menu-open' : '' }}">
             <a href="#" class="nav-link {{ explode('.',Route::currentRouteName())[0]=='ventas' ? 'active' : '' }}">
-              <i class="nav-icon fas fa-tags "></i>
+              <i class="nav-icon fa fa-money "></i>
               <p>
                 Ventas
                 <i class="fas fa-angle-left right"></i>
