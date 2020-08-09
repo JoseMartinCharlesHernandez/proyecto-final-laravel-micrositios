@@ -3,7 +3,8 @@
 
 <div class="card card-solid">
   <div class="text-center">
-    <img src="/banners/el_cedro_banner.jpg" class="rounded" alt="Responsive image">
+    <img src="{{$banner_url}}" class="rounded" alt="Responsive image">
+
   </div>
   <div class="card-body pb-0">
       <div class="row d-flex align-items-stretch">

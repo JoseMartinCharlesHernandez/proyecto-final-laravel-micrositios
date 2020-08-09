@@ -66,6 +66,8 @@
         <div class="card">
           <div class="card-header p-2">
             <ul class="nav nav-pills">
+              <li class="nav-item"><a class="nav-link"  href="{{route('micrositios.show',['id'=>$micrositio->id])}}">Vista del micrositio</a></li>
+              <li class="nav-item"><a class="nav-link" href="#activity" data-toggle="tab">Actividad</a></li>
               <li class="nav-item"><a class="nav-link" href="#activity" data-toggle="tab">Actividad</a></li>
               <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Productos</a></li>
               <li class="nav-item"><a class="nav-link active"  href="#settings" data-toggle="tab">Ajustes</a></li>
@@ -202,6 +204,16 @@
                     <div class=" col-sm-10 input-group">
                       <div class="col-sm-10 custom-file">
                         <input type="file" class="custom-file-input form-control" id="logo"  value="{{  $micrositio->logo_url}}" name="logo" placeholder="Logo">
+                        <label class="custom-file-label" for="exampleInputFile">Cargar Imagen</label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <label for="inputBanner" class="col-sm-2 col-form-label">Banner</label>
+                    <div class=" col-sm-10 input-group">
+                      <div class="col-sm-10 custom-file">
+                        <input type="file" class="custom-file-input form-control" id="banner"  value="{{  $micrositio->banner_url}}" name="banner" placeholder="Banner">
                         <label class="custom-file-label" for="exampleInputFile">Cargar Imagen</label>
                       </div>
                     </div>

@@ -21,6 +21,7 @@ class CreateMicrositiosTable extends Migration
             $table->float('lat', 8, 6)->nullable();
             $table->float('lng', 8, 6)->nullable();	
             $table->string('logo_url',255)->nullable();  
+            $table->string('banner_url',255)->default('/banners/default.jpg');  
             $table->unsignedBigInteger('id_empresario')->unique();
             $table->foreign('id_empresario')->references('id')->on('users');
             $table->unsignedBigInteger('id_estado')->nullable();

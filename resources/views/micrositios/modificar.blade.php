@@ -12,129 +12,139 @@
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-            <form role="form" id="form" method="POST" action="{{ route('micrositios.update',['id'=>$micrositio->id]) }}" enctype="multipart/form-data">
-                @csrf
+                    <form role="form" id="form" method="POST" action="{{ route('micrositios.update',['id'=>$micrositio->id]) }}" enctype="multipart/form-data">
+                        @csrf
 
-                    <input type="number" name="listar" value="1" hidden>
-                    <div class="card-body">
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Nombre</label>
-                        <input type="text" class="form-control @error('nombre') is-invalid @enderror" id="nombre" placeholder="Nombre del Micrositio" name="nombre" value="{{$micrositio->nombre}}">                        
-                        @error('nombre')
-                            <div class="col-form-label" style="color:red;">{{ $message }}</div>
-                        @enderror    
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Dirección</label>
-                        <input type="text" class="form-control @error('direccion') is-invalid @enderror" placeholder="dirección" name="direccion" value="{{$micrositio->direccion}}">
-                        @error('direccion')
-                        <div class="col-form-label" style="color:red;">{{ $message }}</div>
-                        @enderror    
-                    </div>
-
-                    <div class="form-group row">
-                        <label for="inputName" class="col-sm-2 col-form-label">Ubicación</label>
-                          <style>   
-                            #mapaFormulario {
-                                width: 500px;    
-                                height: 400px;
-                            }
-                        </style>
-                         <div class="col-sm-4"><br><br>
-                            <div class="col-sm-6">
-                                <button class="btn btn-warning" id="btn_remove" >remover marcador</button>
-                            </div><br>
-                            <div class="col-sm-6">
-                            <input type="text" class="form-control" id="lat" name="lat" value="{{$micrositio->lat}}" placeholder="latitud" disabled  >
-                            </div><br>
-                            <div class="col-sm-6">
-                            <input type="text" class="form-control" id="lng" name="lng" value=" {{$micrositio->lng  }}" placeholder="longitud" disabled >
+                        <input type="number" name="listar" value="1" hidden>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Nombre</label>
+                                <input type="text" class="form-control @error('nombre') is-invalid @enderror" id="nombre" placeholder="Nombre del Micrositio" name="nombre" value="{{$micrositio->nombre}}">                        
+                                @error('nombre')
+                                    <div class="col-form-label" style="color:red;">{{ $message }}</div>
+                                @enderror    
                             </div>
-                        </div>   
-                        <div id ="mapaFormulario" class="col-sm-6" > </div> 
-                        @if ($errors->has('lat') || $errors->has('lng'))
-                        <div class="col-form-label col-sm-6" style="color:red;"><center>{{$errors->first('lat') }}</center></div>
-                        @endif
-                        <div id="error_type" class="col-form-label" style="color:red; display:none;"></div>
-                      </div>
+                            
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Dirección</label>
+                                <input type="text" class="form-control @error('direccion') is-invalid @enderror" placeholder="dirección" name="direccion" value="{{$micrositio->direccion}}">
+                                @error('direccion')
+                                <div class="col-form-label" style="color:red;">{{ $message }}</div>
+                                @enderror    
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="inputName" class="col-sm-2 col-form-label">Ubicación</label>
+                                <style>   
+                                    #mapaFormulario {
+                                        width: 500px;    
+                                        height: 400px;
+                                    }
+                                </style>
+                                <div class="col-sm-4"><br><br>
+                                    <div class="col-sm-6">
+                                        <button class="btn btn-warning" id="btn_remove" >remover marcador</button>
+                                    </div><br>
+                                    <div class="col-sm-6">
+                                    <input type="text" class="form-control" id="lat" name="lat" value="{{$micrositio->lat}}" placeholder="latitud" disabled  >
+                                    </div><br>
+                                    <div class="col-sm-6">
+                                    <input type="text" class="form-control" id="lng" name="lng" value=" {{$micrositio->lng  }}" placeholder="longitud" disabled >
+                                    </div>
+                                </div>   
+                                <div id ="mapaFormulario" class="col-sm-6" > </div> 
+                                @if ($errors->has('lat') || $errors->has('lng'))
+                                <div class="col-form-label col-sm-6" style="color:red;"><center>{{$errors->first('lat') }}</center></div>
+                                @endif
+                                <div id="error_type" class="col-form-label" style="color:red; display:none;"></div>
+                            </div>
 
 
-                    <div class="form-group">
-                        <a href="{{$micrositio->logo_url}}"></a>    
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputFile">Logo</label>
-                        <div class="input-group">
-                        <div class="custom-file">
-                            <input type="file" name="logo" class="custom-file-input" id="logo">
-                            <label class="custom-file-label" for="exampleInputFile">Seleccionar Logo</label>
+                            <div class="form-group">
+                                <a href="{{$micrositio->logo_url}}"></a>    
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputFile">Logo</label>
+                                <div class="input-group">
+                                <div class="custom-file">
+                                    <input type="file" name="logo" class="custom-file-input" id="logo">
+                                    <label class="custom-file-label" for="exampleInputFile">Seleccionar Logo</label>
+                                </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputFile">Banner</label>
+                                <div class="input-group">
+                                <div class="custom-file">
+                                    <input type="file" name="banner" class="custom-file-input" id="banner">
+                                    <label class="custom-file-label" for="exampleInputFile">Seleccionar Banner</label>
+                                </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="micrositios">Categoria</label>
+                                <select class="form-control" name="categoria" required>
+                                    @foreach ($categorias as $item)
+                                        <option value="{{$item->id}}" {{$micrositio->id_categoria == $item->id ? 'selected' : '' }} >{{$item->nombre}}</option>   
+                                    @endforeach
+                                </select>
+                                @if ($errors->has('categoria'))
+                                <div class="col-form-label" style="color:red;">{{$errors->first('categoria')}}</div>
+                                @endif
+                                <div id="error_type" class="col-form-label" style="color:red; display:none;"></div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="micrositios">Estado</label>
+                                <select class="form-control" name="estado" id="select_estado" required>
+                                    @foreach ($estados as $item)
+                                        <option value="{{$item->id}}" {{$micrositio->id_estado == $item->id ? 'selected' : '' }} >{{$item->nombre}}</option>   
+                                    @endforeach
+                                </select>
+                                @if ($errors->has('estado'))
+                                <div class="col-form-label" style="color:red;">{{$errors->first('estado')}}</div>
+                                @endif
+                                <div id="error_type" class="col-form-label" style="color:red; display:none;"></div>
+                            </div>   
+
+                            <div class="form-group">
+                                <label for="micrositios">Municipio</label>
+                                <select class="form-control" name="municipio" id="select_municipio" required>
+                                    @foreach ($municipios as $item)
+                                        <option value="{{$item->id}}" {{$micrositio->id_municipio == $item->id ? 'selected' : '' }} >{{$item->municipio}}</option>   
+                                    @endforeach
+                                </select>
+                                @if ($errors->has('municipio'))
+                                <div class="col-form-label" style="color:red;">{{$errors->first('municipio')}}</div>
+                                @endif
+                                <div id="error_type" class="col-form-label" style="color:red; display:none;"></div>
+                            </div>   
+
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Descripción</label>
+                                <textarea class="form-control @error('descripcion') is-invalid @enderror" id="descripcion" name="descripcion" placeholder="Descripcion">{{$micrositio->descripcion}}</textarea>
+                                @error('descripcion')
+                                <div class="col-form-label" style="color:red;">{{ $message }}</div>
+                                @enderror    
+                            </div>
+
+                            <div class="form-group">
+                                <label for="micrositios">Estatus</label>
+                                <select class="form-control" name="id_estatus" required>
+                                    @foreach ($estatus as $item)
+                                        <option value="{{$item->id}}" {{$micrositio->id_estatus == $item->id ? 'selected' : '' }} >{{$item->nombre}}</option>   
+                                    @endforeach
+                                </select>
+                            </div>    
                         </div>
+                            <!-- /.card-body -->
+
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary">Actualizar</button>
                         </div>
-                    </div>
-
-                        <div class="form-group">
-                            <label for="micrositios">Categoria</label>
-                            <select class="form-control" name="categoria" required>
-                                @foreach ($categorias as $item)
-                                    <option value="{{$item->id}}" {{$micrositio->id_categoria == $item->id ? 'selected' : '' }} >{{$item->nombre}}</option>   
-                                @endforeach
-                            </select>
-                            @if ($errors->has('categoria'))
-                            <div class="col-form-label" style="color:red;">{{$errors->first('categoria')}}</div>
-                            @endif
-                            <div id="error_type" class="col-form-label" style="color:red; display:none;"></div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="micrositios">Estado</label>
-                            <select class="form-control" name="estado" id="select_estado" required>
-                                @foreach ($estados as $item)
-                                    <option value="{{$item->id}}" {{$micrositio->id_estado == $item->id ? 'selected' : '' }} >{{$item->nombre}}</option>   
-                                @endforeach
-                            </select>
-                            @if ($errors->has('estado'))
-                            <div class="col-form-label" style="color:red;">{{$errors->first('estado')}}</div>
-                            @endif
-                            <div id="error_type" class="col-form-label" style="color:red; display:none;"></div>
-                        </div>   
-
-                        <div class="form-group">
-                            <label for="micrositios">Municipio</label>
-                            <select class="form-control" name="municipio" id="select_municipio" required>
-                                @foreach ($municipios as $item)
-                                    <option value="{{$item->id}}" {{$micrositio->id_municipio == $item->id ? 'selected' : '' }} >{{$item->municipio}}</option>   
-                                @endforeach
-                            </select>
-                            @if ($errors->has('municipio'))
-                            <div class="col-form-label" style="color:red;">{{$errors->first('municipio')}}</div>
-                            @endif
-                            <div id="error_type" class="col-form-label" style="color:red; display:none;"></div>
-                        </div>   
-
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">Descripción</label>
-                            <textarea class="form-control @error('descripcion') is-invalid @enderror" id="descripcion" name="descripcion" placeholder="Descripcion">{{$micrositio->descripcion}}</textarea>
-                            @error('descripcion')
-                            <div class="col-form-label" style="color:red;">{{ $message }}</div>
-                            @enderror    
-                        </div>
-
-                        <div class="form-group">
-                            <label for="micrositios">Estatus</label>
-                            <select class="form-control" name="id_estatus" required>
-                                @foreach ($estatus as $item)
-                                    <option value="{{$item->id}}" {{$micrositio->id_estatus == $item->id ? 'selected' : '' }} >{{$item->nombre}}</option>   
-                                @endforeach
-                            </select>
-                        </div>    
-                    </div>
-                    <!-- /.card-body -->
-
-                    <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">Actualizar</button>
-                    </div>
-                </form>
+                    </form>
                 </div>
                 <!-- /.card -->
             </div>

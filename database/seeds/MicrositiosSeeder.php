@@ -12,7 +12,7 @@ class MicrositiosSeeder extends Seeder
     public function run()
     {
         Micrositio::create([
-            "nombre" => 'Taqueria El Champion',
+            "nombre" => 'Taco Party',
             "direccion" => "Avenida la Paz",
             "id_categoria" => 2,
             "id_estado" => 29,
@@ -22,11 +22,12 @@ class MicrositiosSeeder extends Seeder
             "id_empresario" => 2,
             "lat"=>23.740001,
             "lng"=>-99.115028,
-            "logo_url" =>"/logos/taco.jpg"
+            "logo_url" =>"/logos/taco.jpg",
+            "banner_url" =>"/banners/tacos_banner.jfif"     
         ]);
 
         Micrositio::create([
-            "nombre" => 'Ferreteria la Torre',
+            "nombre" => 'Ferreteria el Cedro',
             "direccion" => "Colonia Tamatán",
             "id_categoria" => 3,
             "id_estado" => 29,
@@ -36,7 +37,8 @@ class MicrositiosSeeder extends Seeder
             "id_empresario" => 3,
             "lat"=>23.712613,
             "lng"=>-99.176246,
-            "logo_url" =>"/logos/martillo.png"
+            "logo_url" =>"/logos/el_cedro.png",
+            "banner_url" =>"/banners/el_cedro_banner.jpg"     
         ]);
 
 
@@ -51,7 +53,8 @@ class MicrositiosSeeder extends Seeder
             "id_empresario" => 4,
             "lat"=>23.728208,
             "lng"=>-99.14456,
-            "logo_url" =>"/logos/soriana.png"
+            "logo_url" =>"/logos/soriana.png",
+            "banner_url" =>"/banners/soriana_banner.png"     
         ]);
     }
 }

@@ -132,6 +132,15 @@ class MicrositiosController extends Controller
             $name ="default.png";
        }
 
+       if(Request()->hasFile('banner')){
+        $file = Request()->file('banner');
+        $name_banner = $file->getClientOriginalName();
+        $file->move(public_path().'/banners/',$name_banner);
+     
+        }else{
+                $name_banner ="default.jpg";
+        }
+    
 
        Micrositio::create([
         "nombre" => Request('nombre'),
@@ -144,7 +153,8 @@ class MicrositiosController extends Controller
         "id_empresario" => Auth::user()->id,
         "lat"=>Request('lat'),
         "lng"=>Request('lng'),
-        "logo_url" =>"/logos/".$name
+        "logo_url" =>"/logos/".$name,
+        "banner_url" =>"/banners/".$name_banner
     ]);
         return  redirect()->route('micrositios.index');
 
@@ -162,8 +172,8 @@ class MicrositiosController extends Controller
     {
         //si el micrositio existe se obtienen los productos
         $productos = Producto::where([['id_micrositio',$id],['id_estatus',1]])->get(); 
-
-        return view('micrositios.show',compact('productos'));
+        $banner_url = Micrositio::find($id)->banner_url;
+        return view('micrositios.show',compact('productos','banner_url'));
     }
 
     /**
@@ -220,6 +230,16 @@ class MicrositiosController extends Controller
         }
 
 
+        if(Request()->hasFile('banner')){
+            $file = Request()->file('banner');
+            $name_banner = $file->getClientOriginalName();
+            $file->move(public_path().'/banners/',$name_banner);
+        
+        }else{
+                $name_banner ="default.jpg";
+        }
+    
+
        $micrositio = Micrositio::find($id);
        // dd($micrositio);
         $micrositio->nombre = Request('nombre');
@@ -235,6 +255,8 @@ class MicrositiosController extends Controller
         //si el logo ha cambiado se actualizará    
         if($name!="default.png")
              $micrositio->logo_url ="/logos/".$name;    
+        if($name_banner!="default.jng")
+             $micrositio->banner_url ="/banners/".$name_banner;    
 
         $micrositio->save();
 
