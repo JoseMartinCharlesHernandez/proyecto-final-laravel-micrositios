@@ -65,7 +65,7 @@ Route::get('/categorias/update/{id}','CategoriasController@update')->name('categ
 //rutas para micrositios
 Route::get('/micrositios-listar','MicrositiosController@listar')->name('micrositios.listar');
 Route::get('/micrositios-index','MicrositiosController@index')->name('micrositios.index');
-Route::get('/micrositios-show-{id}','MicrositiosController@show')->name('micrositios.show');
+Route::get('/micrositios-show/{id}','MicrositiosController@show')->name('micrositios.show');
 Route::post('/micrositios-store','MicrositiosController@store')->name('micrositios.store');
 Route::post('/micrositios/update/{id}','MicrositiosController@update')->name('micrositios.update');
 Route::get('/micrositios/destroy/{id}','MicrositiosController@destroy')->name('micrositios.destroy');
