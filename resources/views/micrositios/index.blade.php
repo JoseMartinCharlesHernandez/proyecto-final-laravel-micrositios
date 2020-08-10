@@ -278,7 +278,7 @@
         var estado = $("#select_estado option:selected").text();
    
         $.ajax({
-            url: 'get-municipios/'+estado,
+            url: 'get-municipios-'+estado,
             success: function(respuesta) {
                 $("#select_municipio").empty()
                 var m = JSON.parse(respuesta)
