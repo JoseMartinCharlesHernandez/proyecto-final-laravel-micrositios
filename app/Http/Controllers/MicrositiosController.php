@@ -255,7 +255,7 @@ class MicrositiosController extends Controller
         //si el logo ha cambiado se actualizará    
         if($name!="default.png")
              $micrositio->logo_url ="/logos/".$name;    
-        if($name_banner!="default.jng")
+        if($name_banner!="default.jpg")
              $micrositio->banner_url ="/banners/".$name_banner;    
 
         $micrositio->save();
