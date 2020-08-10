@@ -40,13 +40,13 @@
           <!-- /.card-header -->
           <div class="card-body">
 
-            <strong><i class="fas fa-map-marker-alt mr-1"></i> dirección</strong>
+            <strong><i class="fas fa-map-marker-alt mr-1"></i> Dirección</strong>
 
                <p class="text-muted">{{  $micrositio->direccion }}</p>
 
             <hr>
 
-            <strong><i class="fas fa-map-marker-alt mr-1"></i> ubicación</strong>
+            <strong><i class="fas fa-map-marker-alt mr-1"></i> Ubicación</strong>
 
                <p class="text-muted">{{  $micrositio->lat  }} , {{  $micrositio->lng}}</p>
 
@@ -67,7 +67,6 @@
           <div class="card-header p-2">
             <ul class="nav nav-pills">
               <li class="nav-item"><a class="nav-link"  href="{{route('micrositios.show',['id'=>$micrositio->id])}}">Vista del micrositio</a></li>
-              <li class="nav-item"><a class="nav-link" href="#activity" data-toggle="tab">Actividad</a></li>
               <li class="nav-item"><a class="nav-link" href="#activity" data-toggle="tab">Actividad</a></li>
               <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Productos</a></li>
               <li class="nav-item"><a class="nav-link active"  href="#settings" data-toggle="tab">Ajustes</a></li>
@@ -149,7 +148,7 @@
                   <div class="form-group row">
                     <label for="inputName" class="col-sm-2 col-form-label">Nombre</label>
                     <div class="col-sm-10">
-                    <input type="text" class="form-control @error('nombre') is-invalid @enderror" id="nombre" name="nombre" value="{{  $micrositio->nombre}}" placeholder="nombre">
+                    <input type="text" class="form-control @error('Nombre') is-invalid @enderror" id="nombre" name="nombre" value="{{  $micrositio->nombre}}" placeholder="nombre">
                        @error('nombre')
                           <div class="col-form-label" style="color:red;">{{ $message }}</div>
                        @enderror
@@ -158,7 +157,7 @@
                   <div class="form-group row">
                     <label for="inputEmail" class="col-sm-2 col-form-label">Dirección</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control @error('direccion') is-invalid @enderror" id="dirección" value="{{  $micrositio->direccion}}" name="direccion" placeholder="Dirección">
+                      <input type="text" class="form-control @error('Direccion') is-invalid @enderror" id="dirección" value="{{  $micrositio->direccion}}" name="direccion" placeholder="Dirección">
                       @error('direccion')
                          <div class="col-form-label" style="color:red;">{{ $message }}</div>
                       @enderror 
@@ -174,13 +173,13 @@
                     </style>
                      <div class="col-sm-4"><br><br>
                         <div class="col-sm-6">
-                            <button class="btn btn-warning" id="btn_remove" >remover marcador</button>
+                            <button class="btn btn-warning" id="btn_remove" >Remover marcador</button>
                         </div><br>
                         <div class="col-sm-6">
-                        <input type="text" class="form-control" id="lat" name="lat" value="{{  $micrositio->lat }}" placeholder="latitud" disabled >
+                        <input type="text" class="form-control" id="lat" name="lat" value="{{  $micrositio->lat }}" placeholder="Latitud" disabled >
                         </div><br>
                         <div class="col-sm-6">
-                        <input type="text" class="form-control" id="lng" name="lng" value=" {{  $micrositio->lng }}" placeholder="longitud" disabled>
+                        <input type="text" class="form-control" id="lng" name="lng" value=" {{  $micrositio->lng }}" placeholder="Longitud" disabled>
                         </div>
                     </div>   
                     <div id ="mapaFormulario" class="col-sm-6" > </div> 
@@ -188,6 +187,9 @@
                     <div class="col-form-label col-sm-6" style="color:red;"><center>{{$errors->first('lat') }}</center></div>
                     @endif
                     <div id="error_type" class="col-form-label" style="color:red; display:none;"></div>
+                  </div>
+                  <div class="col-sm-12">
+                    <label for="inputName2" class="col-sm-12 col-form-label" style="text-align: center"><h3>Datos de la microempresa</h3> </label>
                   </div>
                   <div class="form-group row">
                     <label for="inputName2" class="col-sm-2 col-form-label">Categoria</label>
@@ -201,22 +203,18 @@
 
                   <div class="form-group row">
                     <label for="inputLogo" class="col-sm-2 col-form-label">Logo</label>
-                    <div class=" col-sm-10 input-group">
                       <div class="col-sm-10 custom-file">
                         <input type="file" class="custom-file-input form-control" id="logo"  value="{{  $micrositio->logo_url}}" name="logo" placeholder="Logo">
                         <label class="custom-file-label" for="exampleInputFile">Cargar Imagen</label>
                       </div>
-                    </div>
                   </div>
 
                   <div class="form-group row">
                     <label for="inputBanner" class="col-sm-2 col-form-label">Banner</label>
-                    <div class=" col-sm-10 input-group">
                       <div class="col-sm-10 custom-file">
                         <input type="file" class="custom-file-input form-control" id="banner"  value="{{  $micrositio->banner_url}}" name="banner" placeholder="Banner">
                         <label class="custom-file-label" for="exampleInputFile">Cargar Imagen</label>
                       </div>
-                    </div>
                   </div>
 
                   <div class="form-group row">
@@ -234,12 +232,12 @@
                     </select>
                   </div>
                   <div class="form-group row">
-                    <label for="inputExperience" class="col-sm-2 col-form-label">descripción</label>
+                    <label for="inputExperience" class="col-sm-2 col-form-label">Descripción</label>
                     <div class="col-sm-10">
-                    <textarea class="form-control @error('descripcion') is-invalid @enderror" id="descripcion" name="descripcion" placeholder="Descripcion">{{  $micrositio->descripcion}}</textarea>
-                    @error('descripcion')
-                    <div class="col-form-label" style="color:red;">{{ $message }}</div>
-                    @enderror  
+                        <textarea class="form-control @error('descripcion') is-invalid @enderror" id="descripcion" name="descripcion" placeholder="Descripcion">{{  $micrositio->descripcion}}</textarea>
+                        @error('descripcion')
+                        <div class="col-form-label" style="color:red;">{{ $message }}</div>
+                        @enderror  
                     </div>
                   </div>
                                     

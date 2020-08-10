@@ -13,13 +13,13 @@ class TiposUsuariosSeeder extends Seeder
     public function run()
     {
         DB::table('tipos_usuarios')->insert([
-            'tipo' => 'admin',
+            'tipo' => 'Administrador',
         ]);
         DB::table('tipos_usuarios')->insert([
-            'tipo' => 'manager',
+            'tipo' => 'Empresario',
         ]);
         DB::table('tipos_usuarios')->insert([
-            'tipo' => 'usuario',
+            'tipo' => 'Usuario',
         ]);
         
     }

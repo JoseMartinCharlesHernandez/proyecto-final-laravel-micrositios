@@ -17,10 +17,10 @@
               <th>Nombre</th>
               <th>categoria</th>
               <th>Dirección</th>
-              <th>lat</th>
-              <th>lng</th>
-              <th>empresario</th>
-              <th>estatus</th>
+              <th>Lat</th>
+              <th>Lng</th>
+              <th>Empresario</th>
+              <th>Estatus</th>
               <th>Opciones</th>
             </tr>
             </thead>
@@ -74,14 +74,14 @@
             </tbody>
             <tfoot>
             <tr>
-                <th>Nombre</th>
-                <th>categoria</th>
-                <th>Dirección</th>
-                <th>lat</th>
-                <th>lng</th>
-                <th>empresario</th>
-                <th>estatus</th>
-                <th>Opciones</th>
+              <th>Nombre</th>
+              <th>categoria</th>
+              <th>Dirección</th>
+              <th>Lat</th>
+              <th>Lng</th>
+              <th>Empresario</th>
+              <th>Estatus</th>
+              <th>Opciones</th>
             </tr>
             </tfoot>
           </table>

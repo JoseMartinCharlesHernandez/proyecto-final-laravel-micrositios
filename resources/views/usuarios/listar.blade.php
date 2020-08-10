@@ -16,12 +16,12 @@
           <table id="example1" class="table table-bordered table-striped">
             <thead>
             <tr>
-              <th>id</th>
-              <th>nombre</th>
-              <th>correo</th>
-              <th>tipo</th>
-              <th>estatus</th>
-              <th>opciones</th>
+              <th>Id</th>
+              <th>Nombre</th>
+              <th>Correo</th>
+              <th>Tipo</th>
+              <th>Estatus</th>
+              <th>Opciones</th>
             </tr>
             </thead>
             <tbody>
@@ -68,12 +68,12 @@
             </tbody>
             <tfoot>
             <tr>
-              <th>id</th>
-              <th>nombre</th>
-              <th>correo</th>
-              <th>contraseña</th>
-              <th>tipo</th>
-              <th>opciones</th>
+              <th>Id</th>
+              <th>Nombre</th>
+              <th>Correo</th>
+              <th>Tipo</th>
+              <th>Estatus</th>
+              <th>Opciones</th>
             </tr>
             </tfoot>
           </table>

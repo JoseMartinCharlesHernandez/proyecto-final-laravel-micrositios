@@ -359,7 +359,7 @@
         </div>
         <div class="card-footer">
           <div class="text-right">
-          <a href="/micrositios-show/${item.id}" class="btn btn-sm btn-warning">
+          <a href="/micrositios-show-${item.id}" class="btn btn-sm btn-warning">
               <i class="fas fa-eye"></i> ver
             </a>
           </div>
@@ -398,7 +398,7 @@
             <a title="contactar al vendedor" href="#" class="btn btn-sm bg-teal">
               <i class="fas fa-comments"></i>
             </a>
-            <a href="/ventas/create/${item.id}" class="btn btn-sm btn-warning">
+            <a href="/ventas-create-${item.id}" class="btn btn-sm btn-warning">
               <i class="fa fa-shopping-cart"></i> Comprar
             </a>
           </div>

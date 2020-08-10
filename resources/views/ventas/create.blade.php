@@ -61,7 +61,7 @@
 
                   <div class="mt-4"> 
                         <button type="submit" class=" btn btn-success btn-lg btn-flat mr-2" ><i class="fas fa-shopping-cart" style="color: white"></i> comprar</button>
-                        <button id="btn_quotation" class=" btn btn-primary btn-lg btn-flat mr-2" ><i class="fas fa-envelope" style="color: white"></i> Cotizzar a mi correo</button>
+                        <button id="btn_quotation" class=" btn btn-primary btn-lg btn-flat mr-2" ><i class="fas fa-envelope" style="color: white"></i> Cotizar a mi correo</button>
                   </div>    
             </form>    
               </div>
