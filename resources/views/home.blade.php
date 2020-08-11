@@ -36,7 +36,7 @@
       </div>
 
       <style>
-        #card_1 {
+        #card_1,#card_2 {
             height: 300px; 
             border: 1px solid #ddd;
             background: #f1f1f1;
