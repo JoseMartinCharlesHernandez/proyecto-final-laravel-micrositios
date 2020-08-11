@@ -34,6 +34,15 @@
           </div>
         </div>
       </div>
+
+      <style>
+        #card_1 {
+           /* height: 300px;*/ 
+            border: 1px solid #ddd;
+            background: #f1f1f1;
+            overflow-y: scroll;
+          }
+      </style>
     </div>
   
   
